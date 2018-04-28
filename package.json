@@ -1,0 +1,20 @@
+{
+  "name": "cs546-final-project",
+  "version": "1.0.0",
+  "description": "Website designed to track intramural sports",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tfalsone/cs546-final-project.git"
+  },
+  "author": "Thomas Falsone, Scott Russel, Hunter Bartholomew, Michael Janvier",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tfalsone/cs546-final-project/issues"
+  },
+  "homepage": "https://github.com/tfalsone/cs546-final-project#readme"
+}
