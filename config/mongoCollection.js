@@ -14,5 +14,8 @@ const getCollectionFn = collection => {
 };
 
 module.exports = {
-    // list of mongo databases?
-}
+    // list of mongo databases
+    users: getCollectionFn("users"),
+    teams: getCollectionFn("teams"),
+    leagues: getCollectionFn("leagues")
+};
