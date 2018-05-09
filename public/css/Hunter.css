@@ -1,11 +1,11 @@
 html{
     background-image: url("../logo/sports.jpg");
-    background-color: #1c3144;
     color: #1c3144;
 }
 
 .form{
-    background-color: #70161e;
+    background: rgb(2,0,36);
+    background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(112,22,30,1) 35%);
     width: 25%;
     text-align: center;
     margin: auto;
@@ -58,5 +58,5 @@ input[type="submit"]{
     margin-top : 30px;
 }
 a{
-    color: black;
+    color: grey;
 }
