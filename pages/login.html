@@ -8,25 +8,28 @@
         <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     </head>
     <body>
-        <main class="form">
-            <div class="login">
-                <h1>Log in to 8008Leagues</h1>
+        <main>
+            <img src="../logo/logo_blue.png" class="logo">
+            <div class="form">
+                <div class="login">
+                    <h1>Log in to 8008Leagues</h1>
 
-                <form id="login-form" action="/login" method="post">
-                    <div>
-                        <input type="text" name="username" placeholder="Username"/>
+                    <form id="login-form" action="/login" method="post">
+                        <div>
+                            <input type="text" name="username" placeholder="Username"/>
+                        </div>
+                        <div>
+                            <input type="password" name="password" placeholder="Password"/>
+                        </div>
+                        <div>
+                            <input class="btn" type="submit" value="Game On!"/>
+                        </div>
+                    </form>
+                    <div class="login-footer">
+                        <a>Don't have an account?</a>
+                        <br>
+                        <a href="" action="/sign_up" method="post">Sign up here</a>
                     </div>
-                    <div>
-                        <input type="password" name="password" placeholder="Password"/>
-                    </div>
-                    <div>
-                        <input class="btn" type="submit" value="Game On!"/>
-                    </div>
-                </form>
-                <div class="login-footer">
-                    <a>Don't have an account?</a>
-                    <br>
-                    <a href="" action="/sign_up" method="post">Sign up here</a>
                 </div>
             </div>
         </main>

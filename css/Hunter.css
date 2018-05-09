@@ -1,10 +1,10 @@
 html{
     background-image: url("../logo/sports.jpg");
     background-color: #1c3144;
-    color: white;
+    color: #1c3144;
 }
 
-main{
+.form{
     background-color: #70161e;
     width: 25%;
     text-align: center;
@@ -13,30 +13,32 @@ main{
 }
 
 .signup{
-    top: 5%;
     height: 600px;
+}
+
+.logo{
+    display: block;
+    margin: 0 auto;
 }
 
 input[type="password"],
 input[type="text"]{
-    color: white;
+    color: #1c3144;
     text-align: center;
     box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
     outline: none;
     display: block;
     width: 75%;
     margin: auto;
     padding: 7px;
     border: none;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #1c3144;
     background: transparent;
     margin-bottom: 10px;
     height: 45px;
 }
 
-.form input[type="submit"]{
+input[type="submit"]{
     background-color: #1c3144;
     display: inline-block;
     cursor: pointer;

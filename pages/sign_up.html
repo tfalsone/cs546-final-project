@@ -8,37 +8,40 @@
         <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     </head>
     <body>
-        <main class="form">
-            <div class="signup">
-                <h1>Sign Up for 8008Leagues</h1>
+        <main>
+            <img src="../logo/logo_blue.png" class="logo">
+            <div class="form">
+                <div class="signup">
+                    <h1>Sign Up for 8008Leagues</h1>
 
-                <form class="login-form" action="/login" method="post">
-                    <div>
-                        <input type="text" name="firstname" placeholder="First Name"/>
+                    <form class="login-form" action="/login" method="post">
+                        <div>
+                            <input type="text" name="firstname" placeholder="First Name"/>
+                        </div>
+                        <div>
+                            <input type="text" name="lastname" placeholder="Last Name"/>
+                        </div>
+                        <div>
+                            <input type="text" name="email" placeholder="Email Address"/>
+                        </div>
+                        <div>
+                            <input type="text" name="username" placeholder="Username"/>
+                        </div>
+                        <div>
+                            <input type="password" name="password" placeholder="Password"/>
+                        </div>
+                        <div>
+                            <input type="password" name="password_conf" placeholder="Confirm Password"/>
+                        </div>
+                        <div>
+                            <input class="btn" type="submit" value="Sign Me Up!"/>
+                        </div>
+                    </form>
+                    <div class="signup-footer">
+                        <a>Already have an account?</a>
+                        <br>
+                        <a href="" action="/login" method="post">Log in here</a>
                     </div>
-                    <div>
-                        <input type="text" name="lastname" placeholder="Last Name"/>
-                    </div>
-                    <div>
-                        <input type="text" name="email" placeholder="Email Address"/>
-                    </div>
-                    <div>
-                        <input type="text" name="username" placeholder="Username"/>
-                    </div>
-                    <div>
-                        <input type="password" name="password" placeholder="Password"/>
-                    </div>
-                    <div>
-                        <input type="password" name="password_conf" placeholder="Confirm Password"/>
-                    </div>
-                    <div>
-                        <input class="btn" type="submit" value="Game On!"/>
-                    </div>
-                </form>
-                <div class="signup-footer">
-                    <a>Already have an account?</a>
-                    <br>
-                    <a href="" action="/login" method="post">Log in here</a>
                 </div>
             </div>
         </main>
