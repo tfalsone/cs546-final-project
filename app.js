@@ -6,7 +6,7 @@ const static = express.static(__dirname + '/public');
 app.use(static);
 
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname + '/pages/login.html'));
+    res.sendFile(path.join(__dirname + '/public/pages/login.html'));
 })
 
 app.listen(3000, () => {
