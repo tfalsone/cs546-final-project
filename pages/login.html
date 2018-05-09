@@ -4,29 +4,31 @@
         <title>8008Leagues Login</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="/css/Hunter.css">
         <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     </head>
     <body>
-        <main>
-            <h1>Login to 8008Leagues</h1>
+        <main class="form">
+            <div class="login">
+                <h1>Log in to 8008Leagues</h1>
 
-            <form id="login-form" action="/login" method="post">
-                <div>
-                    <label>Username:</label>
-                    <input type="text" name="username"/>
+                <form id="login-form" action="/login" method="post">
+                    <div>
+                        <input type="text" name="username" placeholder="Username"/>
+                    </div>
+                    <div>
+                        <input type="password" name="password" placeholder="Password"/>
+                    </div>
+                    <div>
+                        <input class="btn" type="submit" value="Game On!"/>
+                    </div>
+                </form>
+                <div class="login-footer">
+                    <a>Don't have an account?</a>
+                    <br>
+                    <a href="" action="/sign_up" method="post">Sign up here</a>
                 </div>
-                <div>
-                    <label>Password:</label>
-                    <input type="password" name="password"/>
-                </div>
-                <div>
-                    <input class="btn btn-primary" type="submit" value="Game On!"/>
-                </div>
-            </form>
-            <a>Don't have an account?</a>
-            <br>
-            <a href="" action="/sign_up" method="post">Sign up here</a>
+            </div>
         </main>
     </body>
 </html>
