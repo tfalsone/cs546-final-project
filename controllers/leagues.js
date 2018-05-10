@@ -47,18 +47,18 @@ exports.findOne = (req, res) => {
     .then(league => {
         if(!league) {
             return res.status(404).send({
-                message: "Note not found with id " + req.params.leagueId
+                message: "League not found with id " + req.params.leagueId
             });            
         }
         res.send(league);
     }).catch(err => {
         if(err.kind === 'ObjectId') {
             return res.status(404).send({
-                message: "Note not found with id " + req.params.leagueId
+                message: "League not found with id " + req.params.leagueId
             });                
         }
         return res.status(500).send({
-            message: "Error retrieving note with id " + req.params.leagueId
+            message: "Error retrieving League with id " + req.params.leagueId
         });
     });
 };
@@ -68,20 +68,51 @@ exports.delete = (req, res) => {
     .then(league => {
         if(!league) {
             return res.status(404).send({
-                message: "Note not found with id " + req.params.leagueId
+                message: "League not found with id " + req.params.leagueId
             });
         }
-        res.send({message: "Note deleted successfully!"});
+        res.send({message: "League deleted successfully!"});
     }).catch(err => {
         if(err.kind === 'ObjectId' || err.name === 'NotFound') {
             return res.status(404).send({
-                message: "Note not found with id " + req.params.leagueId
+                message: "League not found with id " + req.params.leagueId
             });                
         }
         return res.status(500).send({
-            message: "Could not delete note with id " + req.params.leagueId
+            message: "Could not delete League with id " + req.params.leagueId
         });
     });
 
 };
 
+exports.addGame = (req, res) => {
+    var game = {
+        gameId: uuid.v4(),
+        teams: req.body.teams,
+        time: req.body.date,
+        location: req.body.location,
+        score: {team1: "-", team2: "-"}
+    };
+    League.findById(req.params.leagueId)
+    .then(league => {
+        if(!league) {
+            return res.status(404).send({
+                message: "League not found with id " + req.params.leagueId
+            });
+        }
+        league.games.push(game);
+        league.save();
+
+        res.send(league);
+    }).catch(err => {
+        if(err.kind === 'ObjectId' || err.name === 'NotFound') {
+            return res.status(404).send({
+                message: "League not found with id " + req.params.leagueId
+            });                
+        }
+        return res.status(500).send({
+            message: "Could not delete League with id " + req.params.leagueId
+        });
+    });
+
+};
