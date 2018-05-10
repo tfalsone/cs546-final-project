@@ -2,3 +2,49 @@ html {
     font-family: 'Raleway', sans-serif;
     color: #686868;
 }
+
+body { 
+    margin: 0;
+}
+
+/* Header */
+.header {
+    overflow: hidden;
+    background-color: #f1f1f1;
+    padding: 20px 10px;
+}
+
+.header img {
+    float: left;
+}
+
+.header .center a {
+    color: #7EA16B;
+    text-align: center;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px; 
+    line-height: 25px;
+}
+
+.header a.left {
+    float: left;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.header a.left:hover {
+    color: #596F62;
+}
+
+.header .center {
+    margin: 0 auto;
+    width: 265px;
+    margin-top: 20px;
+}
+
+.header .center a:hover {
+    border-bottom: 2px solid #596F62;
+    color: #596F62;
+}
+/* End of Header */
