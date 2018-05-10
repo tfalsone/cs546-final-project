@@ -1,4 +1,5 @@
 const League = require('../models/leagues.js');
+const uuid = require("node-uuid");
 
 // Retrieve and return all leagues from the database.
 exports.findAll = (req, res) => {
@@ -23,7 +24,7 @@ exports.createLeague = (req, res) => {
 
     // Create a Note
     const league = new League({
-        _id: "Temp",
+        _id: uuid.v4(),
         name: req.body.name, 
         sport: req.body.sport, 
         teams: req.body.teams || [],
@@ -40,3 +41,47 @@ exports.createLeague = (req, res) => {
         });
     });
 };
+
+exports.findOne = (req, res) => {
+    League.findById(req.params.leagueId)
+    .then(league => {
+        if(!league) {
+            return res.status(404).send({
+                message: "Note not found with id " + req.params.leagueId
+            });            
+        }
+        res.send(league);
+    }).catch(err => {
+        if(err.kind === 'ObjectId') {
+            return res.status(404).send({
+                message: "Note not found with id " + req.params.leagueId
+            });                
+        }
+        return res.status(500).send({
+            message: "Error retrieving note with id " + req.params.leagueId
+        });
+    });
+};
+
+exports.delete = (req, res) => {
+    League.findByIdAndRemove(req.params.leagueId)
+    .then(league => {
+        if(!league) {
+            return res.status(404).send({
+                message: "Note not found with id " + req.params.leagueId
+            });
+        }
+        res.send({message: "Note deleted successfully!"});
+    }).catch(err => {
+        if(err.kind === 'ObjectId' || err.name === 'NotFound') {
+            return res.status(404).send({
+                message: "Note not found with id " + req.params.leagueId
+            });                
+        }
+        return res.status(500).send({
+            message: "Could not delete note with id " + req.params.leagueId
+        });
+    });
+
+};
+

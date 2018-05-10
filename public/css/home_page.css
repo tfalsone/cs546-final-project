@@ -1,16 +1,10 @@
 * {box-sizing: border-box;}
 
 /* Main */
-main {
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-top: 16px;
-}
-
 .search-container {
     width: 100%;
     padding: 20px;
-    background-color: #C3D898;
+    background-color: #7EA16B;
     border-radius: 5px;
     box-shadow: 0 4px 8px 0 #7EA16B;
 }
@@ -82,8 +76,6 @@ main {
     float: left;
     /*width: 150px;*/
     width: 50%;
-    padding-left: 16px;
-    padding-top: 8px;
 }
 
 .container .results .team2 {
@@ -91,8 +83,6 @@ main {
     text-align: right;
     /*width: 150px;*/
     width: 50%;
-    padding-right: 16px;
-    padding-top: 8px;
 }
 
 .container .results p {
