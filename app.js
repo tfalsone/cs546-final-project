@@ -4,10 +4,12 @@ var path = require("path");
 const bodyParser= require('body-parser');
 const mongoose = require('mongoose');
 const static = express.static(__dirname + '/public');
-const dbConfig = require('./config/settings.js');
+const settings = require('./config/settings');
+const mongoConfig = settings.mongoConfig;
 const configRoutes = require("./routes");
-const MongoClient = require("mongodb").MongoClient;
 
+
+let fullMongoUrl = `${mongoConfig.serverUrl + mongoConfig.database}`;
 mongoose.Promise = global.Promise;
 
 app.use(static);
@@ -15,7 +17,7 @@ app.use(static);
 
 app.use(bodyParser.json());
 // Connecting to the database
-mongoose.connect(dbConfig.serverUrl, { keepAlive: 120 })
+mongoose.connect(fullMongoUrl, { keepAlive: 120 })
 .then(() => {
     console.log("Successfully connected to the database");    
 }).catch(err => {
