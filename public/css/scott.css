@@ -11,6 +11,10 @@ body {
     padding: 20px 10px;
 }
 
+.header img {
+    float: left;
+}
+
 .header a {
     color: #7EA16B;
     text-align: center;
@@ -33,7 +37,7 @@ body {
 .header .center {
     margin: 0 auto;
     width: 265px;
-    margin-top: 13px;
+    margin-top: 20px;
 }
 
 .header .center a:hover {
@@ -45,8 +49,8 @@ body {
 
 /* Main */
 main {
-    margin-left: 32px;
-    margin-right: 32px;
+    margin-left: 10%;
+    margin-right: 10%;
     margin-top: 16px;
 }
 
@@ -55,6 +59,7 @@ main {
     padding: 20px;
     background-color: #C3D898;
     border-radius: 5px;
+    box-shadow: 0 4px 8px 0 #7EA16B;
 }
 
 .search-container input[type=text] {
@@ -78,56 +83,91 @@ main {
     margin-top: 32px;
 }
 
+.recent-events h1 {
+    border-bottom: 2px solid #7EA16B;
+}
+
 .card {
     border-radius: 5px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    box-shadow: 0px 4px 8px 1px #7EA16B;
     transition: 0.3s;
 }
 
 .card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 1px #7EA16B;
 }
 
 .container {
-    padding: 8px 16px;
+    padding: 8px 32px;
 }
 
 .container .top {
     height: 50px;
-    border-bottom: 1px solid #686868;
+    border-bottom: 1px solid #7EA16B;
 }
 
 .container .top #league {
     float: left;
+    font-size: 16px;
 }
 
 .container .top #sport {
     float: right;
+    font-size: 16px;
 }
 
 .container .results {
-    margin-top: 10px;
+    margin-top: 20px;
+    height: 86px;
+    word-wrap: normal;
+    font-size: 24px;
 }
 
 .container .results .team1 {
     float: left;
-    width: 150px;
+    /*width: 150px;*/
+    width: 50%;
 }
 
 .container .results .team2 {
     float: right;
     text-align: right;
-    width: 150px;
+    /*width: 150px;*/
+    width: 50%;
+}
+
+.container .results p {
+    height: 43px;
+    /*line-height: 43px;*/
+    margin: 0 auto;
+}
+
+.container .results p#score {
+    font-weight: bold;
 }
 
 .results .vs {
+    position: fixed;
     text-align: center;
+    left: 25%;
+    right: 25%;
+    
 }
 
 .results img {
     width: 105px;
     height: 58px;
+    margin-top: 15px;
 }
 
+.container .date, .container .final {
+    width: 50%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.container .final {
+    color: #70161E;
+}
 
 /* End of Main */
