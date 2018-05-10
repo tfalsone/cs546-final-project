@@ -45,23 +45,23 @@ let exportedMethods = {
         });
     },
 */
-
+/*
     addUser(firstName, lastName, email, password) {
         return users().then(userCollection => {
             if(userCollection.find({ email: email })) throw "User with this email already exists";
 
-            hash = await bcrypt.hash(password, saltRounds);
+            hash = bcrypt.hash(password, saltRounds);
             // todo - how to use sessionId?
             let newUser = {
                 firstName: firstName,
                 lastName: lastName,
-                _id = uuid.v4(),
+                _id = "temp",
                 email: email,
                 teams: [],
                 leagues: [],
                 hashPwd: hash,
                 profileType: "player",
-                sessionId: 
+                sessionId: "temp"
             };
 
             return userCollection
@@ -74,7 +74,7 @@ let exportedMethods = {
                 });
         });
     },
-
+*/
     removeUser(userId) {
         return users().then(userCollection => {
             return userCollection.removeOne({ _id: userId }).then(deletionInfo => {
