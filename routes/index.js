@@ -1,14 +1,19 @@
+const express = require("express");
 const userRoutes = require("./users");
 const leagueRoutes = require("./leagues");
 const teamRoutes = require("./teams");
 const path = require("path");
+const static = express.static(__dirname + '/public');
+
 
 const constructorMethod = app => {
-    app.use("/users", userRoutes);
-    app.use("/teams", teamRoutes);
+    //app.use("/users", userRoutes);
+    //app.use("/teams", teamRoutes);
     app.use("/leagues", leagueRoutes);
     
     app.use("*", (req, res) => {
-        // not sure?
-    })
-}
+        res.sendFile(path.join(__dirname + '/public/pages/login.html'));
+    });
+};
+
+module.exports = constructorMethod;

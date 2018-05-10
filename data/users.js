@@ -1,7 +1,7 @@
 const mongoCollections = require("../config/mongoCollection");
 const users = mongoCollections.users;
-const teams = mongoCollections.teams;
-const leagues = mongoCollections.leagues;
+// const teams = mongoCollections.teams;
+// const leagues = mongoCollections.leagues;
 const uuid = require("node-uuid");
 const bcrypt = require("bcryptjs");
 const saltRounds = 16;
@@ -22,7 +22,7 @@ let exportedMethods = {
             });
         });
     },
-
+/*
     getUsersByTeam(teamId) {
         return users().then(userCollection => {
             // todo - how to search a list of teams within each profile?
@@ -44,6 +44,7 @@ let exportedMethods = {
             });
         });
     },
+*/
 
     addUser(firstName, lastName, email, password) {
         return users().then(userCollection => {
@@ -71,6 +72,16 @@ let exportedMethods = {
                 .then(newId => {
                     return this.getUserById(newId);
                 });
+        });
+    },
+
+    removeUser(userId) {
+        return users().then(userCollection => {
+            return userCollection.removeOne({ _id: userId }).then(deletionInfo => {
+                if (deletionInfo.deletedCount === 0) {
+                    throw `Could not delete user with id of ${userId}`;
+                }
+            });
         });
     },
 
