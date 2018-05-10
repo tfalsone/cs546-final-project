@@ -1,0 +1,62 @@
+html{
+    background-image: url("../logo/sports.jpg");
+    color: #1c3144;
+}
+
+.form{
+    background: rgb(2,0,36);
+    background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(112,22,30,1) 35%);
+    width: 25%;
+    text-align: center;
+    margin: auto;
+    border: 3px solid #7ea16b;
+}
+
+.signup{
+    height: 600px;
+}
+
+.logo{
+    display: block;
+    margin: 0 auto;
+}
+
+input[type="password"],
+input[type="text"]{
+    color: #1c3144;
+    text-align: center;
+    box-sizing: border-box;
+    outline: none;
+    display: block;
+    width: 75%;
+    margin: auto;
+    padding: 7px;
+    border: none;
+    border-bottom: 1px solid #1c3144;
+    background: transparent;
+    margin-bottom: 10px;
+    height: 45px;
+}
+
+input[type="submit"]{
+    background-color: #1c3144;
+    display: inline-block;
+    cursor: pointer;
+    color: #FFFFFF;
+    font-size: 14px;
+    padding: 8px 18px;
+    text-decoration: none;
+    text-transform: uppercase;
+    border-radius: 3px;
+}
+.signup-footer{
+    color: black;
+    margin-top : 125px;
+}
+.login-footer{
+    color: black;
+    margin-top : 30px;
+}
+a{
+    color: grey;
+}

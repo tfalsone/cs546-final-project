@@ -1,0 +1,9 @@
+html{
+    background-image: url("../logo/sports.jpg");
+    color: #1c3144;
+}
+
+.topnav {
+    background-color: #333;
+    overflow: hidden;
+}
