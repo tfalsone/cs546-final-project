@@ -27,10 +27,6 @@ mongoose.connect(fullMongoUrl, { keepAlive: 120 })
 });
 configRoutes(app);
 
-app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname + '/public/pages/login.html'));
-})
-
 app.listen(3000, () => {
     console.log("We've now got a server!");
     console.log("Your routes will be running on http://localhost:3000");

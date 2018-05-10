@@ -10,9 +10,17 @@ const constructorMethod = app => {
     //app.use("/users", userRoutes);
     //app.use("/teams", teamRoutes);
     app.use("/leagues", leagueRoutes);
-    
+
+    app.get("/home", (req, res) => {
+        res.sendFile(path.join(__dirname + '/../public/pages/home.html'));
+    });
+
+    app.get("/profile", (req, res) => {
+        res.sendFile(path.join(__dirname + '/../public/pages/profile.html'));
+    });
+
     app.use("*", (req, res) => {
-        res.sendFile(path.join(__dirname + '/public/pages/login.html'));
+        res.sendFile(path.join(__dirname + '/../public/pages/login.html'));
     });
 };
 
