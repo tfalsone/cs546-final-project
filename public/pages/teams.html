@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>8008Leagues Login</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../css/Hunter2.css">
+        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+
+    </head>
+    <body>
+        <main>
+            <header class="header">
+                <a href="/home" class="left">8008Leagues</a>
+                <div class="center">
+                    <a href="/teams">Teams</a>
+                    <a href="/leagues">Leagues</a>
+                    <a href="/profile">Profile</a>
+                </div>
+            </header>
+            
+            
+            <section class="wrapper">
+                <div class="card">
+                    <div class="roster">
+                        <h1>Roster</h1>
+                        <ul>
+                            <li>Hunter</li>
+                            <li>Scott</li>
+                            <li>Mike</li>
+                            <li>Tom</li>
+                        </ul>
+                        <ul id="players"></ul>
+                    </div>
+                </div>
+                
+                
+                <!--
+                <div class="schedule">
+                    <h1>This Week's Schedule</h1>
+                    <table>
+                        <tr>
+                            <th>      </th>
+                            <th>Sunday</th>
+                            <th>Monday</th>
+                            <th>Tuesday</th>
+                            <th>Wednesday</th>
+                            <th>Thursday</th>
+                            <th>Friday</th>
+                            <th>Saturday</th>
+                        </tr>
+                        <tr>
+                            <th>Games</th>
+                            <th><button id="myBtn">Open Modal</button></th>
+                        </tr>
+                    </table>
+                </div>
+                <div id="myModal" class="modal">
+
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <p>Some text in the Modal..</p>
+                    </div>
+
+                </div>
+                <div class="stats">
+                    <h1>Team Stats</h1>
+                </div>
+            -->
+            </section>
+        </main>
+
+        <script>
+            // Get the modal
+            var modal = document.getElementById('myModal');
+
+            // Get the button that opens the modal
+            var btn = document.getElementById("myBtn");
+
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[0];
+
+            // When the user clicks on the button, open the modal 
+            btn.onclick = function() {
+                modal.style.display = "block";
+            }
+
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        </script>
+
+    </body>
+</html>
