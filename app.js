@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 var path = require("path");
-const bodyParser= require('body-parser')
+const bodyParser= require('body-parser');
 const mongoose = require('mongoose');
 const static = express.static(__dirname + '/public');
 const dbConfig = require('./config/settings.js');
@@ -11,8 +11,9 @@ const MongoClient = require("mongodb").MongoClient;
 mongoose.Promise = global.Promise;
 
 app.use(static);
-app.use(bodyParser.urlencoded({extended: true}))
+//app.use(bodyParser.urlencoded({extended: true}))
 
+app.use(bodyParser.json());
 // Connecting to the database
 mongoose.connect(dbConfig.serverUrl, { keepAlive: 120 })
 .then(() => {
