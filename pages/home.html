@@ -3,13 +3,50 @@
 	<head>
 		<title>8008Leagues</title>
 		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="/css/main.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/css/main.css">
+		<link rel="stylesheet" href="/css/scott.css">
 		<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 	</head>
 	<body>
-		<main>
-			<h1>What the fuck is up world!</h1>
-		</main>
+        <header class="header">
+            <a href="/home" class="left">8008Leagues</a>
+            <div class="center">
+                <a href="/teams">Teams</a>
+                <a href="/leagues">Leagues</a>
+                <a href="/profile">Profile</a>
+            </div>
+        </header>
+        <main>
+            <div class="search-container">
+                <form onsubmit="search(event)">
+                    <input type="text" placeholder="Search sports, leagues, teams..." name="search">
+                </form>
+            </div>
+
+            <div class="recent-events">
+                <div class="card">
+                    <div class="container">
+                        <div class="top">
+                            <h3 id="league"><b>Stevens Floor Hockey</b></h3>
+                            <h3 id="sport"><b>Hockey</b></h3>
+                        </div>
+                        <div class="results">
+                            <div class="team1">
+                                <p id="team_name">Sigma Nu</p>
+                                <p id="score">5</p>
+                            </div>
+                            <div class="team2">
+                                <p id="team_name">Delta Tau Delta</p>
+                                <p id="score">2</p>
+                            </div>
+                            <div class="vs">
+                                <img src="/img/vs.png">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
 	</body>
 </html>

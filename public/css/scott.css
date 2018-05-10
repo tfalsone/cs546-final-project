@@ -1,0 +1,133 @@
+* {box-sizing: border-box;}
+
+body { 
+    margin: 0;
+}
+
+/* Header */
+.header {
+    overflow: hidden;
+    background-color: #f1f1f1;
+    padding: 20px 10px;
+}
+
+.header a {
+    color: #7EA16B;
+    text-align: center;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px; 
+    line-height: 25px;
+}
+
+.header a.left {
+    float: left;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.header a.left:hover {
+    color: #596F62;
+}
+
+.header .center {
+    margin: 0 auto;
+    width: 265px;
+    margin-top: 13px;
+}
+
+.header .center a:hover {
+    border-bottom: 2px solid #596F62;
+    color: #596F62;
+}
+/* End of Header */
+
+
+/* Main */
+main {
+    margin-left: 32px;
+    margin-right: 32px;
+    margin-top: 16px;
+}
+
+.search-container {
+    width: 100%;
+    padding: 20px;
+    background-color: #C3D898;
+    border-radius: 5px;
+}
+
+.search-container input[type=text] {
+    margin: 0 auto;
+    padding: 6px;
+    font-size: 16px;
+    border: none;
+    width: 100%;
+    border-radius: 5px;
+    color: #686868;
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+}
+
+.search-container input[type=text]:focus {
+    outline: none;
+}
+
+.recent-events {
+    width: 100%;
+    margin-top: 32px;
+}
+
+.card {
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+    padding: 8px 16px;
+}
+
+.container .top {
+    height: 50px;
+    border-bottom: 1px solid #686868;
+}
+
+.container .top #league {
+    float: left;
+}
+
+.container .top #sport {
+    float: right;
+}
+
+.container .results {
+    margin-top: 10px;
+}
+
+.container .results .team1 {
+    float: left;
+    width: 150px;
+}
+
+.container .results .team2 {
+    float: right;
+    text-align: right;
+    width: 150px;
+}
+
+.results .vs {
+    text-align: center;
+}
+
+.results img {
+    width: 105px;
+    height: 58px;
+}
+
+
+/* End of Main */
