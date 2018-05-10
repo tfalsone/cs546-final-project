@@ -1,17 +1,20 @@
-const dbConnection = require("../config/mongoConnection");
+// const dbConnection = require("../config/mongoConnection");
 const mongoose = require('mongoose')
-const data = require("../data/");
-const teams = data.teams;
+// const data = require("../data/");
+// const teams = data.teams;
 var Schema = mongoose.Schema
 
 const teamSchema = Schema({
-    id: String,
-    name: String,
-    roster: [String],
+    _id: Schema.Types.ObjectId,
+    name: {
+        type: String,
+        unique: true
+    },
+    roster: [Schema.Types.ObjectId],
     record: [{
-        leagueId: String,
-        wins: int,
-        losses: int
+        leagueId: Schema.Types.ObjectId,
+        wins: Number,
+        losses: Number
     }]
 });
 

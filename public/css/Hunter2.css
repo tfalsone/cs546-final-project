@@ -39,10 +39,17 @@ html{
     color: #596F62;
 }
 
+h1 {
+    text-align: center;
+    border-bottom: 2px solid #7EA16B;
+}
+
 .card {
     border-radius: 5px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
+    width: 25%;
+    text-align: center;
 }
 
 .card:hover {
@@ -51,27 +58,9 @@ html{
 .container {
     padding: 8px 16px;
 }
-.wrapper{
-    width: 80%;
-    height: 200px;
-    margin: auto;
-    padding: 10px;
-}
 
-.roster{
-    text-align: center;
-    width: 15%;
-    height: 200px;
-    float: left;
-}
 
-.schedule{
-    margin-left: 15%;
-    height: 200px;
-}
-.stats{
-    margin-left: 15%;
-}
+
 table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
