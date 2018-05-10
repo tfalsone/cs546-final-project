@@ -5,8 +5,9 @@ const league = require('../controllers/league.js');
 
 
 //get all leagues
+/*
 router.get("/", league.findAll);
 
 router.post("/", league.createLeague);
-
+*/
 module.exports = router;
