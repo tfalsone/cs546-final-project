@@ -94,7 +94,7 @@ exports.removeUser = (req, res) => {
     });
 };
 
-exports.addTeam(req, res) {
+exports.addTeam = (req, res) => {
     User.findById(req.params.userId)
     .then(user => {
         if(!user) {
@@ -118,7 +118,7 @@ exports.addTeam(req, res) {
     });
 };
 
-exports.addLeague(req, res) {
+exports.addLeague = (req, res) => {
     User.findById(req.params.userId)
     .then(user => {
         if(!user) {
@@ -142,7 +142,7 @@ exports.addLeague(req, res) {
     });
 };
 
-exports.removeTeam(req, res) {
+exports.removeTeam = (req, res) => {
     User.findById(req.params.userId)
     .then(user => {
         if(!user) {
