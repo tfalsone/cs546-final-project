@@ -8,8 +8,8 @@ const league = require('../controllers/leagues');
 router.get("/", (req, res) => {
     league.findAll()
     .then(leagues => {
-    res.send(leagues);
-    //res.render("admin_add_team", {leagues});
+    //res.send(leagues);
+    res.render("admin_add_team", {leagues});
     });
 });
 
@@ -27,6 +27,20 @@ router.post("/", (req, res) => {
     });
 
 
+});
+
+
+router.put("/:leagueId", (req, res) => {
+    if(!req.body.teamId) {
+        return res.status(400).send({
+            message: "TeamId name can not be empty"
+        });
+    }
+    league.addTeam(req.params.leagueId, req.body.teamId)
+    .then(l => {
+        res.send(l);
+        //res.render("admin_add_team", {leagues});
+    });
 });
 
 router.get("/:leagueId", (req, res) => {

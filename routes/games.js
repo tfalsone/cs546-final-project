@@ -41,7 +41,7 @@ router.delete("/:gameId", (req, res) => {
     .then(success => {
         if(success){
             res.redirect("/home");
-        } else {
+        }else {
             res.status(404).send({
                 message: "Game not deleted " + req.params.gameId
             });                

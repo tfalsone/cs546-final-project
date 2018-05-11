@@ -30,6 +30,26 @@ exports.createLeague = function(name, sport) {
     });
 };
 
+exports.addTeam = function(leagueId, teamId) {
+    return League.findById(leagueId)
+    .then(league => {
+        if(!league) {
+            
+                console.log( "League not found with id " + leagueId);
+        }
+        league.teams.push(teamId);
+        league.save();
+        return league;
+        //res.send(team);
+    }).catch(err => {
+        if(err.kind === 'String' || err.name === 'NotFound') {
+            
+            console.log( "League not found with id " + leagueId);
+        }
+            console.log( "Could not add to League with id " + leagueId);
+    });
+}
+
 exports.findOne = function(leagueId) {
     return League.findById(leagueId)
     .then(league => {

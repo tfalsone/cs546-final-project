@@ -54,7 +54,7 @@ exports.getHome = async (req, res) => {
     });
 
     let leagueIdArray = recentGames.map(a => a.leagueId);
-
+    console.log(leagueIdArray);
 
     let leagues = await League.find( {"_id": { $in: leagueIdArray }}   )
     .then(leagues => {
