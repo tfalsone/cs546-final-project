@@ -15,8 +15,8 @@ const userSchema = Schema({
         unique: true
     },
     hashPwd: String,
-    teams: [Schema.Types.ObjectId],
-    leagues: [Schema.Types.ObjectId],
+    teams: [String],
+    leagues: [String],
     profileType: String
 });
 

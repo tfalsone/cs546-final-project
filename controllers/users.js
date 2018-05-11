@@ -100,9 +100,10 @@ exports.addTeam = (req, res) => {
     .then(user => {
         if(!user) {
             return res.status(404).send({
-                message: "User not found with id " + req.params.userId
+                message: "!!User not found with id " + req.params.userId
             });
         }
+        
         user.teams.push(req.body.teamId);
         user.save();
 
@@ -127,7 +128,7 @@ exports.addLeague = (req, res) => {
                 message: "User not found with id " + req.params.userId
             });
         }
-        user.leagues.push(req.body.leageId);
+        user.leagues.push(req.body.leagueId);
         user.save();
 
         res.send(user);
