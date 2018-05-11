@@ -64,7 +64,7 @@ const constructorMethod = app => {
                             var passAuth = bcrypt.compareSync(pass, currUser.hashPwd);
                             if (passAuth) {
                                 console.log("Password confirmed");
-                                res.cookie("AuthCookie", currUser);
+                                res.cookie("AuthCookie", currUser._id);
                                 res.redirect("/home");
                             } else {
                                 console.log("Passwords do not match");
