@@ -7,7 +7,7 @@ const gameSchema = Schema({
         teams: {team1: String, team2: String},
         time: Date,
         location: String,
-        score: {team1: String, team2: String}
+        score: {team1Score: String, team2Score: String}
 });
 
 module.exports = mongoose.model('Game', gameSchema);
