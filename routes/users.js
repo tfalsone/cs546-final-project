@@ -12,6 +12,8 @@ router.post("/", user.createUser);
 
 router.get("/:userId", user.getUserById);
 
+router.put("/getByEmail", user.getUserByEmail);
+
 router.delete("/:userId", user.removeUser);
 
 router.put("/addTeam/:userId", user.addTeam);
