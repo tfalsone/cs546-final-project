@@ -15,8 +15,8 @@ exports.seedDB = function() {
     mongoose.Promise = global.Promise;
     mongoose.connect(fullMongoUrl, { keepAlive: 120 })
         .then(() => {
-            // cleanDB();
-            fillDB();
+            //cleanDB();
+            //fillDB();
 
     }).catch(err => {
         console.log('Could not connect to the database. Exiting now...');
@@ -112,7 +112,7 @@ async function fillDB(){
     team.addUser(team2._id, user6._id);
     user.addTeam(user6._id, team2._id);
     user.addLeague(user6._id, league1._id);
-    user.addTeam(user5._id, team6._id);
+    user.addTeam(user5._id, team5._id);
     user.addLeague(user6._id, league2._id);
 
     team.addUser(team3._id, user7._id);
@@ -159,8 +159,4 @@ async function fillDB(){
 
     user.addLeague(user1._id, league2._id);
     user.addLeague(user2._id, league2._id);*/
-
-
-
-
 }
