@@ -115,7 +115,7 @@ async function fillDB(){
     team.addUser(team2._id, user6._id);
     user.addTeam(user6._id, team2._id);
     user.addLeague(user6._id, league1._id);
-    user.addTeam(user5._id, team5._id);
+    user.addTeam(user6._id, team5._id);
     user.addLeague(user6._id, league2._id);
 
     team.addUser(team3._id, user7._id);
@@ -133,8 +133,8 @@ async function fillDB(){
     team.addUser(team3._id, user9._id);
     user.addTeam(user9._id, team3._id);
     user.addLeague(user9._id, league1._id);
-    user.addTeam(user8._id, team5._id);
-    user.addLeague(user8._id, league2._id);
+    user.addTeam(user9._id, team5._id);
+    user.addLeague(user9._id, league2._id);
 
     var game1 = await game.createGame(league1._id, team1._id, team2._id, "2018-05-09T15:23:38.654Z", "Schafer Lawn");
     var game2 = await game.createGame(league1._id, team1._id, team2._id, new Date(), "Schafer Lawn");
