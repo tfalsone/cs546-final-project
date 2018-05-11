@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>8008Leagues</title>
+		<meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../css/main.css">
+		<link rel="stylesheet" href="../css/home_page.css">
+		<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+        <script>
+            function setVars(){
+            document.getElementById("teams").innerHTML = <%- JSON.stringify(teams) %>;
+            }
+        </script>
+	</head>
+	<body onload="setVars()">
+        <p id="teams"></p>
+	</body>
+</html>
