@@ -56,7 +56,8 @@ exports.createUser = (req, res) => {
         email: req.body.email,
         teams: req.body.teams || [],
         leagues: req.body.leagues || [],
-        hashPwd: hash,
+        // hashPwd: hash,
+        hashPwd: req.body.password,
         profileType: "player",
         // todo - what to do with sessionId?
         sessionId: "Temp"
@@ -99,9 +100,10 @@ exports.addTeam = (req, res) => {
     .then(user => {
         if(!user) {
             return res.status(404).send({
-                message: "User not found with id " + req.params.userId
+                message: "!!User not found with id " + req.params.userId
             });
         }
+        
         user.teams.push(req.body.teamId);
         user.save();
 
@@ -126,7 +128,7 @@ exports.addLeague = (req, res) => {
                 message: "User not found with id " + req.params.userId
             });
         }
-        user.leagues.push(req.body.leageId);
+        user.leagues.push(req.body.leagueId);
         user.save();
 
         res.send(user);
@@ -174,7 +176,7 @@ exports.removeLeague = (req, res) => {
                 message: "User not found with id " + req.params.userId
             });
         }
-        user.leagues.pull(req.body.leageId);
+        user.leagues.pull(req.body.leagueId);
         user.save();
 
         res.send({ message: "League deleted from user profile" });
