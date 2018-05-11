@@ -129,17 +129,14 @@ exports.getProfile = async (req, res) => {
     //res.redirect("../profile");
 };
 
-exports.getAddTeam = async (req, res) => {
-    league.findAll()
+exports.getAddTeam = function() {
+    return league.findAll()
     .then(leagues => {
     console.log(leagues);
+    return leagues;
     //res.send(leagues);
     res.render("admin_add_team", {leagues});
     });
-};
-
-exports.getAddLeague = (req, res) => {
-    res.render("admin_add_league");
 };
 
 exports.getTeams = async (req, res) => {
