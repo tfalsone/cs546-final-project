@@ -5,14 +5,14 @@ const mongoose = require('mongoose')
 var Schema = mongoose.Schema
 
 const teamSchema = Schema({
-    _id: Schema.Types.ObjectId,
+    _id: String,
     name: {
         type: String,
         unique: true
     },
-    roster: [Schema.Types.ObjectId],
+    roster: [String],
     record: [{
-        leagueId: Schema.Types.ObjectId,
+        leagueId: String,
         wins: Number,
         losses: Number
     }]
