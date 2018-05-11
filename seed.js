@@ -15,7 +15,7 @@ exports.seedDB = function() {
     mongoose.Promise = global.Promise;
     mongoose.connect(fullMongoUrl, { keepAlive: 120 })
         .then(() => {
-            cleanDB();
+            //cleanDB();
             //fillDB();
 
     }).catch(err => {

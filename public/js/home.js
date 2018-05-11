@@ -75,12 +75,41 @@ $(document).ready(function() {
                     console.log(e);
                 }
             }).done(function(leagues, status) {
-                console.log("Games:");
-                console.log(games);
-                console.log("Teams:");
-                console.log(teams);
-                console.log("Leagues:");
-                console.log(leagues);
+                //console.log("Games:");
+                //console.log(games);
+                //console.log("Teams:");
+                //console.log(teams);
+                //console.log("Leagues:");
+                //console.log(leagues);
+
+                games.forEach(function(game) {
+                    var datetime = new Date(game["time"]);
+                    if (datetime < new Date()) {
+                        var day = weekday[datetime.getDay()];
+                        var date = month[datetime.getMonth()] + " " + datetime.getDate();
+                        var hours = datetime.getHours();
+                        hours = (hours > 12)? hours -12 : hours;
+                        hours = (hours == '00')? 12 : hours;
+                        hours = zeroPad(hours, 2);
+                        var minutes = zeroPad(datetime.getMinutes(), 2);
+                        var suffix = (hours >= 12)? 'pm' : 'am';
+                        var league = leagues.find(function(league) {
+                            return league["_id"] == game["leagueId"];
+                        });
+                        var team1 = teams.find(function(team) {
+                            return team["_id"] == game["team1"];
+                        });
+                        var team2 = teams.find(function(team) {
+                            return team["_id"] == game["team2"];
+                        });
+
+                        console.log("League: " + league["name"] + "\tSport: " + league["sport"]);
+                        console.log("Team 1 (" + team1["name"] + ") VS Team 2 (" + team2["name"] + ")");
+                        console.log("Team 1: " + game["score"]["team1Score"] + "\tTeam 2: " + game["score"]["team2Score"]);
+                        console.log(day + ", " + date + " @ " + hours + ":" + minutes + " " + suffix);
+                        console.log("\n");
+                    }
+                });
             });
         });
     });
