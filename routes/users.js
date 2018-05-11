@@ -18,8 +18,8 @@ router.put("/addTeam/:userId", user.addTeam);
 
 router.put("/addLeague/:userId", user.addLeague);
 
-router.patch("/removeTeam/:userId", user.removeTeam);
+router.put("/removeTeam/:userId", user.removeTeam);
 
-router.delete("/removeLeague/:userId", user.removeLeague);
+router.put("/removeLeague/:userId", user.removeLeague);
 
 module.exports = router;

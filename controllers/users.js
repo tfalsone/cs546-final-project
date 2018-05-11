@@ -176,7 +176,7 @@ exports.removeLeague = (req, res) => {
                 message: "User not found with id " + req.params.userId
             });
         }
-        user.leagues.pull(req.body.leageId);
+        user.leagues.pull(req.body.leagueId);
         user.save();
 
         res.send({ message: "League deleted from user profile" });
