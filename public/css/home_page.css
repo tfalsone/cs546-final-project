@@ -31,6 +31,7 @@
 }
 
 .recent-events h1 {
+    padding-bottom: 4px;
     border-bottom: 2px solid #7EA16B;
 }
 
@@ -85,10 +86,18 @@
     width: 50%;
 }
 
+.container .results .team2 p#team_name {
+    margin-right: -5px;
+}
+
 .container .results p {
     height: 43px;
-    /*line-height: 43px;*/
     margin: 0 auto;
+    display: inline-block;
+}
+
+.container .results p#team_name {
+    font-weight: bold;
 }
 
 .container .results p#score {
