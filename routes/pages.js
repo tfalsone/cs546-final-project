@@ -2,8 +2,6 @@ const express = require("express");
 const router = express.Router();
 const page = require('../controllers/pages');
 
-
-
 router.get("/home/:userId", page.getHome);
 
 router.get("/profile/:userId", page.getProfile);

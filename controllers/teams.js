@@ -1,222 +1,188 @@
 const Team = require('../models/teams.js');
 const uuid = require("node-uuid");
 
-exports.findAll = (req, res) => {
-    Team.find()
+exports.findAll = function() {
+    return Team.find()
     .then(team => {
-        res.send(team);
+        return team
+        //res.send(team);
     }).catch(err => {
-        res.status(500).send({
-            message: err.message || "Some error occurred while retrieving teams."
-        });
+        console.log(err.message || "Some error occurred while retrieving teams.");
     });
 };
 
-exports.createTeam = (req, res) => {
-    console.log(req.body);
-    if(!req.body.name) {
-        return res.status(400).send({
-            message: "Incomplete Form"
-        });
-    }
+exports.createTeam = function(name) {
 
     const team = new Team({
         _id: uuid.v4(),
-        name: req.body.name,
+        name: name,
         roster: [],
         record: []
     });
-    team.save()
+    return team.save()
     .then(data => {
-        console.log(data);
-        res.redirect("/");
+        return team;
+        //console.log(data);
+        //res.redirect("/");
     }).catch(err => {
-        res.status(500).send({
-            message: err.message || "Some error occurred while creating the Game."
-        });
+        console.log(err.message || "Some error occurred while creating the Game.");
     });
 };
 
-exports.addUser = (req, res) => {
-    Team.findById(req.params.teamId)
+exports.addUser = function(teamId, userId) {
+    return Team.findById(teamId)
     .then(team => {
         if(!team) {
-            return res.status(404).send({
-                message: "Team not found with id " + req.params.teamId
-            });
+            
+                console.log( "Team not found with id " + teamId);
         }
-        team.roster.push(req.params.userId);
+        team.roster.push(userId);
         team.save();
-
-        res.send(team);
+        return team;
+        //res.send(team);
     }).catch(err => {
         if(err.kind === 'String' || err.name === 'NotFound') {
-            return res.status(404).send({
-                message: "Team not found with id " + req.params.teamId
-            });
+            
+            console.log( "Team not found with id " + teamId);
         }
-        return res.status.send({
-            message: "Could not add to Team with id " + req.params.teamId
-        });
+            console.log( "Could not add to Team with id " + teamId);
     });
 };
 
 
-exports.removeUser = (req, res) => {
-    Team.findById(req.params.teamId)
+exports.removeUser = function(teamId, userId) {
+    return Team.findById(teamId)
     .then(team => {
         if(!team) {
-            return res.status(404).send({
-                message: "Team not found with id " + req.params.teamId
-            });
+            
+                console.log( "Team not found with id " + teamId);
         }
-        team.roster.pull(req.params.userId);
+        team.roster.pull(userId);
         team.save();
-
-        res.send(team);
+        return team
+        //res.send(team);
     }).catch(err => {
         if(err.kind === 'String' || err.name === 'NotFound') {
-            return res.status(404).send({
-                message: "Team not found with id " + req.params.teamId
-            });
+            
+            console.log( "Team not found with id " + teamId);
         }
-        return res.status.send({
-            message: "Could not add to Team with id " + req.params.teamId
-        });
+            console.log( "Could not add to Team with id " + teamId);
     });
 };
 
-exports.addLeague = (req, res) => {
-    Team.findById(req.params.teamId)
+exports.addLeague = function(teamId, leagueId) {
+    return Team.findById(teamId)
     .then(team => {
         if(!team) {
-            return res.status(404).send({
-                message: "Team not found with id " + req.params.teamId
-            });
+            
+                console.log( "Team not found with id " + teamId);
         }
         var record = {
-            leagueId: req.params.leagueId,
+            leagueId: leagueId,
             wins: 0,
             losses: 0
         };
         team.record.push(record);
         team.save();
-
-        res.send(team);
+        return team;
+        //res.send(team);
     }).catch(err => {
         if(err.kind === 'String' || err.name === 'NotFound') {
-            return res.status(404).send({
-                message: "Team not found with id " + req.params.teamId
-            });
+            
+            console.log( "Team not found with id " + teamId);
         }
-        return res.status.send({
-            message: "Could not add to Team with id " + req.params.teamId
-        });
+            console.log( "Could not add to Team with id " + teamId);
     });
 };
 
 
-exports.removeLeague = (req, res) => {
-    Team.update({_id : req.params.teamId }, { "$pull": {"record": { "leagueId": req.params.leagueId}}}, { safe: true })
+exports.removeLeague = function(teamId, leagueId) {
+    return Team.update({_id : teamId }, { "$pull": {"record": { "leagueId": leagueId}}}, { safe: true })
     .then(team => {
         if(!team) {
-            return res.status(404).send({
-                message: "Team not found with id " + req.params.teamId
-            });
+            
+                console.log( "Team not found with id " + teamId);
         }
-        res.send(team);
+        return team;
+        //res.send(team);
     }).catch(err => {
         if(err.kind === 'String' || err.name === 'NotFound') {
-            return res.status(404).send({
-                message: "Team not found with id " + req.params.teamId
-            });
+            
+                console.log( "Team not found with id " + teamId);
         }
-        return res.status(404).send({
-            message: "Could not remove League from Team with id " + req.params.teamId
-        });
+        
+            console.log( "Could not remove League from Team with id " + teamId);
     });
 };
 
-exports.updateWin = (req, res) => {
-    Team.update({"_id" : req.params.teamId, "record.leagueId": req.params.leagueId }, {"$inc" : {"record.$.wins": 1}}, { safe: true })
+exports.updateWin = function(teamId, leagueId) {
+    return Team.update({"_id" : teamId, "record.leagueId": leagueId }, {"$inc" : {"record.$.wins": 1}}, { safe: true })
     .then(team => {
         if(!team) {
-            return res.status(404).send({
-                message: "Team not found with id " + req.params.teamId
-            });            
+            
+                console.log( "Team not found with id " + teamId);            
         }
-        res.send(team);
+        return team;
+        //res.send(team);
     }).catch(err => {
         if(err.kind === 'ObjectId') {
-            return res.status(404).send({
-                message: "Team not found with id " + req.params.teamId
-            });                
+            
+                console.log( "Team not found with id " + teamId);                
         }
-        return res.status(500).send({
-            message: "Error retrieving Team with id " + req.params.teamId
-        });
+            console.log( "Error retrieving Team with id " + teamId);
     });
 };
 
-exports.updateLoss = (req, res) => {
-    Team.update({"_id" : req.params.teamId, "record.leagueId": req.params.leagueId }, {"$inc" : {"record.$.losses": 1}}, { safe: true })
+exports.updateLoss = function(teamId, leagueId) {
+    return Team.update({"_id" : teamId, "record.leagueId": leagueId }, {"$inc" : {"record.$.losses": 1}}, { safe: true })
     .then(team => {
         if(!team) {
-            return res.status(404).send({
-                message: "Team not found with id " + req.params.teamId
-            });            
+            
+                console.log( "Team not found with id " + teamId);            
         }
-        res.send(team);
+        return team;
+        //res.send(team);
     }).catch(err => {
         if(err.kind === 'ObjectId') {
-            return res.status(404).send({
-                message: "Team not found with id " + req.params.teamId
-            });                
+            
+                console.log( "Team not found with id " + teamId);                
         }
-        return res.status(500).send({
-            message: "Error retrieving Team with id " + req.params.teamId
-        });
+            console.log( "Error retrieving Team with id " + teamId);
     });
 };
 
-exports.delete = (req, res) => {
-    Team.findByIdAndRemove(req.params.teamId)
+exports.delete = function (teamId){
+    return Team.findByIdAndRemove(teamId)
     .then(team => {
         if(!team) {
-            return res.status(404).send({
-                message: "Team not found with id " + req.params.teamId
-            });
+            
+                console.log( "Team not found with id " + teamId);
         }
-        res.send({message: "Team deleted successfully!"});
+        return true;
+        //console.log( "Team deleted successfully!");
     }).catch(err => {
         if(err.kind === 'ObjectId' || err.name === 'NotFound') {
-            return res.status(404).send({
-                message: "Team not found with id " + req.params.teamId
-            });                
+            
+                console.log( "Team not found with id " + teamId);                
         }
-        return res.status(500).send({
-            message: "Team not delete Game with id " + req.params.teamId
-        });
+            console.log( "Team not delete Game with id " + teamId);
     });
 };
 
-exports.findOne = (req, res) => {
-    Team.findById(req.params.teamId)
+exports.findOne = function (teamId){
+    return Team.findById(teamId)
     .then(team => {
         if(!team) {
-            return res.status(404).send({
-                message: "Team not found with id " + req.params.teamId
-            });            
+            
+            console.log( "Team not found with id " + teamId);            
         }
-        res.send(team);
+        return team;
+        //res.send(team);
     }).catch(err => {
         if(err.kind === 'ObjectId') {
-            return res.status(404).send({
-                message: "Team not found with id " + req.params.teamId
-            });                
+            
+                console.log( "Team not found with id " + teamId);                
         }
-        return res.status(500).send({
-            message: "Error retrieving Team with id " + req.params.teamId
-        });
+            console.log( "Error retrieving Team with id " + teamId);
     });
 };

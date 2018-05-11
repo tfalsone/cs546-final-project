@@ -2,114 +2,90 @@ const Game = require('../models/games.js');
 const uuid = require("node-uuid");
 
 
-exports.findAll = (req, res) => {
-    Game.find()
+exports.findAll = function() {
+    return Game.find()
     .then(game => {
-        res.send(game);
+        return game;
+        //res.send(game);
     }).catch(err => {
-        res.status(500).send({
-            message: err.message || "Some error occurred while retrieving games."
-        });
+        console.log(err.message || "Some error occurred while retrieving games.");
     });
 };
 
-exports.createGame = (req, res) => {
-    // Validate request
-    console.log(req.body);
-    if(!req.body.leagueId || !req.body.team1 || !req.body.team2 || !req.body.time || !req.body.location) {
-        return res.status(400).send({
-            message: "Incomplete Form"
-        });
-    }
+exports.createGame = function(leagueId, team1, team2, time, location) {
 
     // Create a Note
     const game = new Game({
         _id: uuid.v4(),
-        leagueId: req.body.leagueId,
-        teams: {team1: req.body.team1, team2: req.body.team2},
-        time: req.body.time,
-        location: req.body.location,
+        leagueId: leagueId,
+        team1: team1,
+        team2: team2,
+        time: time,
+        location: location,
         score: {team1Score: "-", team2Score: "-"}
     });
 
     // Save Note in the database
-    game.save()
+    return game.save()
     .then(data => {
-        console.log(data);
-        res.redirect("/");
+        return game;
+       // res.redirect("/");
     }).catch(err => {
-        res.status(500).send({
-            message: err.message || "Some error occurred while creating the Game."
-        });
+        console.log(err.message || "Some error occurred while creating the Game.");
     });
 };
 
 
-exports.updateScore = (req, res) => {
-    Game.findByIdAndUpdate(req.params.gameId, {
+exports.updateScore = function(gameId, team1, team2) {
+    return Game.findByIdAndUpdate(gameId, {
         $set: {
-            "score.team1Score": req.body.team1,
-            "score.team2Score": req.body.team2
+            "score.team1Score": team1,
+            "score.team2Score": team2
         }
     }, {new: true})
     .then(game => {
         if(!game) {
-            return res.status(404).send({
-                message: "Game not found with id " + req.params.gameId
-            });            
+                console.log("Game not found with id " + gameId);            
         }
-        res.send(game);
+        return game;
+        //res.send(game);
     }).catch(err => {
         if(err.kind === 'ObjectId') {
-            return res.status(404).send({
-                message: "Game not found with id " + req.params.gameId
-            });                
+            console.log(err.message || "Game not found with id " + gameId);                
         }
-        return res.status(500).send({
-            message: "Error retrieving Game with id " + req.params.gameId
-        });
+            console.log("Error retrieving Game with id " + gameId);
     });
 };
 
-exports.delete = (req, res) => {
-    Game.findByIdAndRemove(req.params.gameId)
+exports.delete = function(gameId) {
+    return Game.findByIdAndRemove(gameId)
     .then(game => {
         if(!game) {
-            return res.status(404).send({
-                message: "Game not found with id " + req.params.gameId
-            });
+            console.log("Game not found with id " + gameId);
         }
-        res.send({message: "Game deleted successfully!"});
+        return true;
+        //res.send({message: "Game deleted successfully!"});
     }).catch(err => {
         if(err.kind === 'ObjectId' || err.name === 'NotFound') {
-            return res.status(404).send({
-                message: "Game not found with id " + req.params.gameId
-            });                
+            console.log("Game not found with id " + gameId);                
         }
-        return res.status(500).send({
-            message: "Could not delete Game with id " + req.params.gameId
-        });
+        console.log("Could not delete Game with id " + gameId);
     });
 };
 
-exports.findOne = (req, res) => {
-    Game.findById(req.params.gameId)
+exports.findOne = function(gameId) {
+    return Game.findById(gameId)
     .then(game => {
         if(!game) {
-            return res.status(404).send({
-                message: "Game not found with id " + req.params.gameId
-            });            
+            console.log("Game not found with id " + gameId);            
         }
-        res.send(game);
+        return game;
+        //res.send(game);
     }).catch(err => {
         if(err.kind === 'ObjectId') {
-            return res.status(404).send({
-                message: "Game not found with id " + req.params.gameId
-            });                
+            console.log("Game not found with id " + gameId);                
         }
-        return res.status(500).send({
-            message: "Error retrieving Game with id " + req.params.gameId
-        });
+        console.log("Error retrieving Game with id " + gameId);
     });
 };
 

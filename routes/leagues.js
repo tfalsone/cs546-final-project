@@ -5,12 +5,48 @@ const league = require('../controllers/leagues');
 
 
 //get all leagues
-router.get("/", league.findAll);
+router.get("/", (req, res) => {
+    league.findAll()
+    .then(leagues => {
+    res.send(leagues);
+    //res.render("admin_add_team", {leagues});
+    });
+});
 
-router.post("/", league.createLeague);
+router.post("/", (req, res) => {
+    if(!req.body.name || !req.body.name) {
+        return res.status(400).send({
+            message: "League name can not be empty"
+        });
+    }
 
-router.get("/:leagueId", league.findOne);
+    league.createLeague(req.body.name, req.body.sport)
+    .then(l => {
+        res.send(l);
+        //res.render("admin_add_team", {leagues});
+    });
 
-router.delete("/:leagueId", league.delete);
+
+});
+
+router.get("/:leagueId", (req, res) => {
+    league.findOne(req.params.leagueId)
+    .then(l => {
+        res.send(l);
+    });
+});
+
+router.delete("/:leagueId", (req, res) => {
+    league.delete(req.params.leagueId)
+    .then(success => {
+        if(success){
+            res.redirect("/home");
+        }else {
+            res.status(404).send({
+                message: "League not deleted " + leagueId
+            });                
+        }
+    });
+});
 
 module.exports = router;
