@@ -132,6 +132,20 @@ const constructorMethod = app => {
         res.sendFile(path.join(__dirname + '/../public/pages/profile.html'));
     });
 
+
+    app.use("/addLeague", (req, res, next) => {
+        if (!(req.cookies.AuthCookie)) {
+            console.log("Unauthorized: User is not logged in");
+            res.redirect("/");
+        }
+        next();
+    });
+
+    app.get("/addLeague", (req, res) => {
+        res.render("admin_add_league");
+    });
+
+
     app.get("/", (req, res) => {
         if (req.cookies.AuthCookie) {
             console.log("User is authenticated");
