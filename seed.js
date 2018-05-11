@@ -65,12 +65,15 @@ async function fillDB(){
     var user5 = await user.createUser("Joe", "Schmoe", "jchmoe@stevens.edu", "Pass123");
     var user6 = await user.createUser("John", "Doe", "jdoe@stevens.edu", "Pass123");
 
+    var user7 = await user.createUser("Mary", "Jane", "mjane@stevens.edu", "Pass123");
+
     console.log(user1);
     var league1 = await league.createLeague("8008 Orginial", "Football");
     var league2 = await league.createLeague("The Second Coming", "Golf");
 
     var team1 = await team.createTeam("8008 Boyz", league1._id);
     var team2 = await team.createTeam("The Other Guys", league1._id);
+    var team3 = await team.createTeam("A Really Bad Team", league1._id);
 
     team.addUser(team1._id, user1._id);
     team.addUser(team1._id, user2._id);
@@ -80,8 +83,11 @@ async function fillDB(){
     team.addUser(team2._id, user5._id);
     team.addUser(team2._id, user6._id);
 
+
     var game1 = await game.createGame(league1._id, team1._id, team2._id, "2018-05-09T15:23:38.654Z", "Schafer Lawn");
     var game2 = await game.createGame(league1._id, team1._id, team2._id, new Date(), "Schafer Lawn");
+    var game3 = await game.createGame(league1._id, team1._id, team2._id, "2018-05-13T15:00:00.654Z", "Babio Garage");
+    
 
     await game.updateScore(game1._id, "5", "3");
     await game.updateScore(game2._id, "7", "0");
