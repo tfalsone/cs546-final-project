@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 var Schema = mongoose.Schema
 
-/*
 const leagueSchema = Schema({
     _id: String,
     name: String,
@@ -15,5 +14,5 @@ const leagueSchema = Schema({
         score: {team1: String, team2: String}
     }]
 });
-*/
-//module.exports = mongoose.model('League', leagueSchema);
+
+module.exports = mongoose.model('League', leagueSchema);
