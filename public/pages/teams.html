@@ -1,14 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>8008Leagues Login</title>
+        <title>8008Leagues</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="../css/Hunter2.css">
         <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 
     </head>
-    <body>
+    <body onload="setVars()">
+        <script>
+            function setVars(){
+                var select = document.getElementById("leaguelist"); 
+                var leaguelst = <%- JSON.stringify(leagues) %>;
+
+                for(var i = 0; i < leaguelst.length; i++) {
+                    var opt = leaguelst[i].name;
+                    var el = document.createElement("option");
+                    el.textContent = opt;
+                    el.value = opt;
+                    select.appendChild(el);
+                }
+            }
+        </script>
         <main>
             <header class="header">
                 <a href="/home" class="left">8008Leagues</a>
@@ -19,17 +33,20 @@
                 </div>
             </header>
 
-            <h1>Team Name</h1>
+            <div class="select-style">
+                <select class="dropdown" id="leaguelist" name="leagueId">
+                    <option value="" disabled selected>Select Team</option>
+                </select>
+            </div>
+            
+            <h1 id="teamname"></h1>
+
             <section class="wrapper">
                 <div class="roster">
                     <div class="card">
                         <div class="container">
                             <h1>Roster</h1>
                             <ul>
-                                <li>Hunter</li>
-                                <li>Scott</li>
-                                <li>Mike</li>
-                                <li>Tom</li>
                             </ul>
                             <ul id="players"></ul>
                         </div>
@@ -40,70 +57,19 @@
                 <div class="schedule">
                     <div class="card">
                         <div class="container">
-                            <h1>This Week's Schedule</h1>
-                            <table>
-                                <tr class="days">
-                                    <th>      </th>
-                                    <th>Sunday</th>
-                                    <th>Monday</th>
-                                    <th>Tuesday</th>
-                                    <th>Wednesday</th>
-                                    <th>Thursday</th>
-                                    <th>Friday</th>
-                                    <th>Saturday</th>
-                                </tr>
-                                <tr>
-                                    <th>Games</th>
-                                    <th><button id="myBtn">Open Modal</button></th>
-                                </tr>
-                            </table>
-                        </div>
-                        <div id="myModal" class="modal">
-
-                            <div class="modal-content">
-                                <span class="close">&times;</span>
-                                <p>Some text in the Modal..</p>
-                            </div>
+                            <h1>Upcoming Games</h1>
                         </div>
                     </div>
                 </div>
-                <div class="schedule">
+
+                <div class="stats">
                     <div class="card">
                         <div class="container">
-                            <h1>Team Stats</h1>
+                            <h1>Past Games</h1>
                         </div>
                     </div>
                 </div>
             </section>
         </main>
-
-        <script>
-            // Get the modal
-            var modal = document.getElementById('myModal');
-
-            // Get the button that opens the modal
-            var btn = document.getElementById("myBtn");
-
-            // Get the <span> element that closes the modal
-            var span = document.getElementsByClassName("close")[0];
-
-            // When the user clicks on the button, open the modal 
-            btn.onclick = function() {
-                modal.style.display = "block";
-            }
-
-            // When the user clicks on <span> (x), close the modal
-            span.onclick = function() {
-                modal.style.display = "none";
-            }
-
-            // When the user clicks anywhere outside of the modal, close it
-            window.onclick = function(event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
-            }
-        </script>
-
     </body>
 </html>

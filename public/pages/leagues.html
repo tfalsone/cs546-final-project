@@ -4,13 +4,11 @@
         <title>8008Leagues</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="../css/main.css">
         <link rel="stylesheet" href="../css/Hunter2.css">
         <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+
     </head>
     <body onload="setVars()">
-        
-        
         <script>
             function setVars(){
                 var select = document.getElementById("leaguelist"); 
@@ -20,19 +18,11 @@
                     var opt = leaguelst[i].name;
                     var el = document.createElement("option");
                     el.textContent = opt;
-                    el.value = leaguelst[i]._id;
-                    el.setAttribute("name", "leagueID");
+                    el.value = opt;
                     select.appendChild(el);
                 }
             }
-            function setId(){
-                var select = document.getElementById("leaguelist");
-                select.setAttribute("value",select.options[select.selectedIndex].value);
-                
-            }
         </script>
-        
-        
         <main>
             <header class="header">
                 <a href="/home" class="left">8008Leagues</a>
@@ -43,16 +33,43 @@
                 </div>
             </header>
 
-            <form class="add_team" action="/teams" method="post">
-                <h1>Add New Team</h1>
-                <div class="select-style">
-                    <select class="dropdown" id="leaguelist" name="leagueId">
-                        <option value="" disabled selected>Select league to add team to</option>
-                    </select>
+            <div class="select-style">
+                <select class="dropdown" id="leaguelist" name="leagueId">
+                    <option value="" disabled selected>Select League</option>
+                </select>
+            </div>
+            
+            <h1 id="teamname"></h1>
+
+            <section class="wrapper">
+                <div class="roster">
+                    <div class="card">
+                        <div class="container">
+                            <h1>Teams</h1>
+                            <ul>
+                            </ul>
+                            <ul id="players"></ul>
+                        </div>
+                    </div>
                 </div>
-                <input class="leaguename" placeholder="Team Name" name="name">
-                <input class="btn" type="submit" value="Get the game started!" onclick="setId()" />
-            </form>
+
+
+                <div class="schedule">
+                    <div class="card">
+                        <div class="container">
+                            <h1>Upcoming Games</h1>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats">
+                    <div class="card">
+                        <div class="container">
+                            <h1>Past Games</h1>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </main>
     </body>
 </html>

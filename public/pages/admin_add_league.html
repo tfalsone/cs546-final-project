@@ -18,9 +18,10 @@
                     <a href="/profile">Profile</a>
                 </div>
             </header>
-            <form class="add_league">
+            <form class="add_team" action="/leagues" method="post">
                 <h1>Add New League</h1>
-                <input class="leaguename" placeholder="League Name">
+                <input class="leaguename" placeholder="League Name" name="name">
+                <input class="leaguename" placeholder="Sport" name="sport">
                 <input class="btn" type="submit" value="Get the game started!"/>
             </form>
         </main>

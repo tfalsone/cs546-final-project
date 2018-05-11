@@ -244,7 +244,7 @@ exports.getAddTeam = async (req, res) => {
 };
 
 exports.getAddLeague = (req, res) => {
-
+    res.render("admin_add_league");
 };
 
 exports.getTeams = (req, res) => {

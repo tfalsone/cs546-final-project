@@ -10,7 +10,7 @@ router.get("/", (req, res) => {
     .then(leagues => {
     console.log(leagues);
     res.send(leagues);
-    res.render("admin_add_team", {leagues});
+    //res.render("admin_add_team", {leagues});
     });
 });
 
@@ -23,7 +23,8 @@ router.post("/", (req, res) => {
 
     league.createLeague(req.body.name, req.body.sport)
     .then(l => {
-        res.send(l);
+        res.redirect("pages/AddLeague");
+        //res.send(l);
         //res.render("admin_add_team", {leagues});
     });
 
