@@ -81,6 +81,14 @@ const constructorMethod = app => {
         }
     });
 
+    app.use("/register", (req, res, next) => {
+        if (req.cookies.AuthCookie) {
+            console.log("User is already logged in");
+            res.redirect("/home");
+        }
+        next();
+    });
+    
     app.get("/register", (req, res) => {
         console.log("register");
         res.sendFile(path.join(__dirname + '/../public/pages/sign_up.html'));

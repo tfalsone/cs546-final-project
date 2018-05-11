@@ -15,8 +15,8 @@ exports.seedDB = function() {
     mongoose.Promise = global.Promise;
     mongoose.connect(fullMongoUrl, { keepAlive: 120 })
         .then(() => {
-            //cleanDB();
-            //fillDB();
+            // cleanDB();
+            fillDB();
 
     }).catch(err => {
         console.log('Could not connect to the database. Exiting now...');
@@ -66,31 +66,89 @@ async function fillDB(){
     var user6 = await user.createUser("John", "Doe", "jdoe@stevens.edu", "Pass123");
 
     var user7 = await user.createUser("Mary", "Jane", "mjane@stevens.edu", "Pass123");
+    var user8 = await user.createUser("Mike", "Kaspar", "mkaspar@stevens.edu", "Pass123");
+    var user9 = await user.createUser("Dan", "Wronka", "dwronka@stevens.edu", "Pass123");
 
-    console.log(user1);
+    // console.log(user1);
     var league1 = await league.createLeague("8008 Orginial", "Football");
-    var league2 = await league.createLeague("The Second Coming", "Golf");
+    var league2 = await league.createLeague("Dodgeball Tournament", "Dodgeball");
 
     var team1 = await team.createTeam("8008 Boyz", league1._id);
     var team2 = await team.createTeam("The Other Guys", league1._id);
     var team3 = await team.createTeam("A Really Bad Team", league1._id);
+    var team4 = await team.createTeam("Cobras", league2._id);
+    var team5 = await team.createTeam("Average Joes", league2._id);
 
     team.addUser(team1._id, user1._id);
+    user.addTeam(user1._id, team1._id);
+    user.addLeague(user1._id, league1._id);
+    user.addTeam(user1._id, team4._id);
+    user.addLeague(user1._id, league2._id);
+
     team.addUser(team1._id, user2._id);
+    user.addTeam(user2._id, team1._id);
+    user.addLeague(user2._id, league1._id);
+    user.addTeam(user2._id, team4._id);
+    user.addLeague(user2._id, league2._id);
+
     team.addUser(team1._id, user3._id);
+    user.addTeam(user3._id, team1._id);
+    user.addLeague(user3._id, league1._id);
+    user.addTeam(user3._id, team4._id);
+    user.addLeague(user3._id, league2._id);
+
     team.addUser(team1._id, user4._id);
-
+    user.addTeam(user4._id, team1._id);
+    user.addLeague(user4._id, league1._id);
+    user.addTeam(user4._id, team4._id);
+    user.addLeague(user4._id, league2._id);
+    
     team.addUser(team2._id, user5._id);
-    team.addUser(team2._id, user6._id);
+    user.addTeam(user5._id, team2._id);
+    user.addLeague(user5._id, league1._id);
+    user.addTeam(user5._id, team5._id);
+    user.addLeague(user5._id, league2._id);
 
+    team.addUser(team2._id, user6._id);
+    user.addTeam(user6._id, team2._id);
+    user.addLeague(user6._id, league1._id);
+    user.addTeam(user5._id, team6._id);
+    user.addLeague(user6._id, league2._id);
+
+    team.addUser(team3._id, user7._id);
+    user.addTeam(user7._id, team3._id);
+    user.addLeague(user7._id, league1._id);
+    user.addTeam(user7._id, team5._id);
+    user.addLeague(user7._id, league2._id);
+
+    team.addUser(team3._id, user8._id);
+    user.addTeam(user8._id, team3._id);
+    user.addLeague(user8._id, league1._id);
+    user.addTeam(user8._id, team5._id);
+    user.addLeague(user8._id, league2._id);
+
+    team.addUser(team3._id, user9._id);
+    user.addTeam(user9._id, team3._id);
+    user.addLeague(user9._id, league1._id);
+    user.addTeam(user8._id, team5._id);
+    user.addLeague(user8._id, league2._id);
 
     var game1 = await game.createGame(league1._id, team1._id, team2._id, "2018-05-09T15:23:38.654Z", "Schafer Lawn");
     var game2 = await game.createGame(league1._id, team1._id, team2._id, new Date(), "Schafer Lawn");
-    var game3 = await game.createGame(league1._id, team1._id, team2._id, "2018-05-13T15:00:00.654Z", "Babio Garage");
-    
+    var game3 = await game.createGame(league1._id, team1._id, team2._id, "2018-05-13T15:00:00.654Z", "Babbio Garage");
+    var game4 = await game.createGame(league1._id, team1._id, team3._id, "2018-05-10T13:00:00.654Z", "Turf");
+    var game5 = await game.createGame(league1._id, team2._id, team3._id, "2018-05-10T15:00:00.654Z", "Turf")
+
+    var game6 = await game.createGame(league2._id, team4._id, team5._id, "2018-05-06T13:00:38.654Z", "Canavan Gym");
+    var game7 = await game.createGame(league2._id, team4._id, team5._id, "2018-05-07T13:00:38.654Z", "Canavan Gym");
 
     await game.updateScore(game1._id, "5", "3");
     await game.updateScore(game2._id, "7", "0");
+    await game.updateScore(game4._id, "3", "10");
+    await game.updateScore(game5._id, "5", "7");
+
+    await game.updateScore(game6._id, "3", "2");
+    await game.updateScore(game7._id, "5", "7");
 
 
     console.log("Done Seeding");
