@@ -211,11 +211,27 @@ exports.getProfile = async (req, res) => {
             }
         }
     }
-    console.log("teams\n", teams);
+    var wins = 0;
+    var losses = 0;
+    teams.forEach(element => {
+        element.record.forEach(r => {
+            wins += Number(r.wins);
+            losses += Number(r.losses);
+        });
+    });
+    console.log("Wins: ", wins, " Losses: ", losses);
+    console.log("teams\n", teams[0].record);
     console.log("Leagues\n",leagues);
     console.log("GameList\n",finalList);
 
-    res.redirect("../profile");
+    res.render("profile", {
+        teams: teams,
+        leagues: leagues,
+        upcomingGames: finalList,
+        wins: wins,
+        losses: losses
+    })
+    //res.redirect("../profile");
 };
 
 exports.getAddTeam = (req, res) => {

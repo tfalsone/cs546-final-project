@@ -9,6 +9,7 @@ router.get("/", (req, res) => {
     league.findAll()
     .then(leagues => {
     //res.send(leagues);
+    console.log(leagues);
     res.render("admin_add_team", {leagues});
     });
 });

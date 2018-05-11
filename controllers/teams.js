@@ -1,5 +1,6 @@
 const Team = require('../models/teams.js');
 const uuid = require("node-uuid");
+const league = require("./leagues");
 
 exports.findAll = function() {
     return Team.find()
@@ -27,6 +28,9 @@ exports.createTeam = function(name, leagueId) {
     });
     return team.save()
     .then(data => {
+        if(leagueId){
+            league.addTeam(leagueId, data._id)
+        }
         return team;
         //console.log(data);
         //res.redirect("/");
