@@ -69,8 +69,8 @@ async function fillDB(){
     var league1 = await league.createLeague("8008 Orginial", "Football");
     var league2 = await league.createLeague("The Second Coming", "Golf");
 
-    var team1 = await team.createTeam("8008 Boyz");
-    var team2 = await team.createTeam("The Other Guys");
+    var team1 = await team.createTeam("8008 Boyz", league1._id);
+    var team2 = await team.createTeam("The Other Guys", league1._id);
 
     team.addUser(team1._id, user1._id);
     team.addUser(team1._id, user2._id);
@@ -80,15 +80,14 @@ async function fillDB(){
     team.addUser(team2._id, user5._id);
     team.addUser(team2._id, user6._id);
 
-    league.addTeam(league1._id, team1._id);
-    league.addTeam(league1._id, team2._id);
-
     var game1 = await game.createGame(league1._id, team1._id, team2._id, "2018-05-09T15:23:38.654Z", "Schafer Lawn");
     var game2 = await game.createGame(league1._id, team1._id, team2._id, new Date(), "Schafer Lawn");
 
-    game.updateScore(game1._id, "5", "3");
-    game.updateScore(game1._id, "7", "0");
+    await game.updateScore(game1._id, "5", "3");
+    await game.updateScore(game2._id, "7", "0");
 
+
+    console.log("Done Seeding");
     /*user.addLeague(user1._id, league1._id);
     user.addLeague(user2._id, league1._id);
     user.addLeague(user3._id, league1._id);

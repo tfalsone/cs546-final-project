@@ -18,7 +18,7 @@ router.post("/", (req, res) => {
             message: "Incomplete Form"
         });
     }
-    team.createTeam(req.body.name)
+    team.createTeam(req.body.name, req.body.leagueId)
     .then(t => {
         res.send(t);
         //res.render("admin_add_team", {leagues});

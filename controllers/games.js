@@ -1,4 +1,5 @@
 const Game = require('../models/games.js');
+const team = require("./teams");
 const uuid = require("node-uuid");
 
 
@@ -46,6 +47,15 @@ exports.updateScore = function(gameId, team1, team2) {
     .then(game => {
         if(!game) {
                 console.log("Game not found with id " + gameId);            
+        }
+
+        if(Number(team1) == Number(team2)){
+        } else if (Number(team1) > Number(team2)){
+            team.updateWin(game.team1, game.leagueId);
+            team.updateLoss(game.team2, game.leagueId);
+        } else {
+            team.updateWin(game.team2, game.leagueId);
+            team.updateLoss(game.team1, game.leagueId);
         }
         return game;
         //res.send(game);

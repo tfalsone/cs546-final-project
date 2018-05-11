@@ -1,5 +1,6 @@
 const League = require('../models/leagues.js');
 const uuid = require("node-uuid");
+const team = require("./teams");
 
 
 // Retrieve and return all leagues from the database.
@@ -39,6 +40,9 @@ exports.addTeam = function(leagueId, teamId) {
         }
         league.teams.push(teamId);
         league.save();
+
+        team.addLeague(teamId, league._id);
+
         return league;
         //res.send(team);
     }).catch(err => {

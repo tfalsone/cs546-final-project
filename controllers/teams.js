@@ -11,13 +11,19 @@ exports.findAll = function() {
     });
 };
 
-exports.createTeam = function(name) {
-
+exports.createTeam = function(name, leagueId) {
+    var r = null;
+    if(leagueId){
+        r =  [{
+            leagueId: leagueId,
+            wins: 0,
+            losses: 0}]
+    }
     const team = new Team({
         _id: uuid.v4(),
         name: name,
         roster: [],
-        record: []
+        record: r || []
     });
     return team.save()
     .then(data => {

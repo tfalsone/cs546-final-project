@@ -66,7 +66,6 @@ exports.getHome = async (req, res) => {
         });
     });
 
-
     var finalList = [];
     for(var i = 0; i < recentGames.length; i++){
         for(var j = 0; j < leagues.length; j++){
@@ -83,7 +82,7 @@ exports.getHome = async (req, res) => {
                     team2: team2.name,
                     time: recentGames[i].time,
                     location: recentGames[i].location,
-                    score: {team1Score: recentGames[i].team1Score, team2Score: recentGames[i].team2Score}
+                    score: {team1Score: recentGames[i].score.team1Score, team2Score: recentGames[i].score.team2Score}
                 }
                 finalList.push(tmp);
             }
