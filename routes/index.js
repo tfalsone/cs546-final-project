@@ -44,22 +44,35 @@ const constructorMethod = app => {
                 console.log("No username indicated");
                 res.redirect("/login");
             } else {
-                currUser = userController.getUserByEmail(email);
-                var pass = req.body.password;
-                if (pass = "") {
-                    console.log("No password provided");
-                    res.redirect("/login");
-                } else {
-                    var passAuth = bcrypt.compare(pass, currUser.hashPwd);
-                    if (passAuth) {
-                        console.log("Password confirmed");
-                        res.cookie("AuthCookie", currUser);
-                        res.redirect("/home");
-                    } else {
-                        console.log("Incorrect password");
+                userController.getUserByEmail(email)
+                .then(user => {
+                    currUser = user;
+                    if(currUser == "") {
                         res.redirect("/login");
+                    } else {
+                        var pass = req.body.password;
+                        if (pass = "") {
+                            console.log("No password provided");
+                            res.redirect("/login");
+                        } else {
+                            bcrypt.compare(pass, user.hashPwd)
+                            .then(passAuth => {
+                                if (passAuth) {
+                                    console.log("Password confirmed");
+                                    res.cookie("AuthCookie", currUser);
+                                    res.redirect("/home");
+                                } else {
+                                    console.log("Incorrect password");
+                                    res.redirect("/login");
+                                }
+                            }).catch(err => {
+                                console.log(err);
+                            });
+                        }
                     }
-                }
+                }).catch(err => {
+                    console.log(err);
+                });
             }
         }        
     });
