@@ -12,6 +12,30 @@ exports.findAll = function() {
     });
 };
 
+
+exports.findByUser = function(userId){
+    return Team.find({
+        "roster": userId
+    })
+    .then(user => {
+        if (!user) {
+            return res.status(404).send({
+                message: "User not found with id " + userId
+            });
+        }
+        return user;
+    }).catch(err => {
+        if (err.kind === 'String') {
+            return res.status(404).send({
+                message: "User not found with id " + userId
+            });
+        }
+        return res.status(500).send({
+            message: "Error retrieving User with id " + userId
+        });
+    });
+};
+
 exports.createTeam = function(name, leagueId) {
     var r = null;
     if(leagueId){
