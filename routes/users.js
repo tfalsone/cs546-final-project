@@ -5,6 +5,10 @@ const user = require('../controllers/users');
 router.get("/", user.getAllUsers);
 
 router.post("/", user.createUser);
+/*
+    user post needs the following  params:
+    first name, last name, email, password
+*/
 
 router.get("/:userId", user.getUserById);
 
