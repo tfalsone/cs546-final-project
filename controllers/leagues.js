@@ -29,13 +29,12 @@ exports.createLeague = (req, res) => {
         name: req.body.name, 
         sport: req.body.sport, 
         teams: req.body.teams || [],
-        games: req.body.games || []
     });
 
     // Save Note in the database
     league.save()
     .then(data => {
-        res.send(data);
+        res.redirect("/");
     }).catch(err => {
         res.status(500).send({
             message: err.message || "Some error occurred while creating the League."
