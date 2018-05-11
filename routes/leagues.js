@@ -12,4 +12,7 @@ router.post("/", league.createLeague);
 router.get("/:leagueId", league.findOne);
 
 router.delete("/:leagueId", league.delete);
+
+router.put("/addGame/:leagueId", league.addGame);
+
 module.exports = router;
