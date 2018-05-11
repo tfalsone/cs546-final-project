@@ -79,6 +79,9 @@ async function fillDB(){
     var team4 = await team.createTeam("Cobras", league2._id);
     var team5 = await team.createTeam("Average Joes", league2._id);
 
+    // console.log(team1);
+    // console.log(team1._id);
+
     team.addUser(team1._id, user1._id);
     user.addTeam(user1._id, team1._id);
     user.addLeague(user1._id, league1._id);
@@ -112,7 +115,7 @@ async function fillDB(){
     team.addUser(team2._id, user6._id);
     user.addTeam(user6._id, team2._id);
     user.addLeague(user6._id, league1._id);
-    user.addTeam(user5._id, team6._id);
+    user.addTeam(user5._id, team5._id);
     user.addLeague(user6._id, league2._id);
 
     team.addUser(team3._id, user7._id);
