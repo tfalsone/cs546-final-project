@@ -1,5 +1,6 @@
+* {box-sizing: border-box;}
+
 html{
-    4
     color: #1c3144;
 }
 
@@ -40,15 +41,30 @@ html{
 }
 
 h1 {
+    padding-top: 5px;
+    width: 90%;
+    margin: auto;
     text-align: center;
     border-bottom: 2px solid #7EA16B;
 }
 
+.signup,
+.login{
+    margin: auto;
+    height: 600px;
+    width: 30%;
+}
+
+.logo{
+    display: block;
+    margin: 0 auto;
+}
+
 .card {
+    background: white;
     border-radius: 5px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
-    width: 25%;
     text-align: center;
 }
 
@@ -58,13 +74,104 @@ h1 {
 .container {
     padding: 8px 16px;
 }
+.wrapper{
+    width: 100%;
+    display: inline-block;
+}
+.roster{
+    float: left;
+    margin-left: 3%;
+    margin-top: 2%;
+    width: 20%;
+}
 
+.schedule{
+    float: right;
+    margin-right: 20%;
+    margin-top: 2%; 
+    width: 50%;
+}
 
+.stats{
+    float: right;
+    margin-right: 35%;
+    margin-top: 5%;
+    width: 30%;
+}
 
-table, th, td {
-    border: 1px solid black;
+ul{
+    list-style: none;
+}
+
+table{
+    text-align: center;
+    margin-left: 2%;
+    margin-top: 20px;
     border-collapse: collapse;
 }
+
+th{
+    width: 8%;
+    border-bottom: 1px solid black;
+}
+
+
+.leaguename{
+    color: #1c3144;
+    text-align: center;
+    box-sizing: border-box;
+    outline: none;
+    display: block;
+    width: 75%;
+    margin: auto;
+    padding: 7px;
+    border: none;
+    border-bottom: 1px solid #1c3144;
+    background: transparent;
+    margin-bottom: 10px;
+    height: 45px;
+}
+
+input[type="password"],
+input[type="text"]{
+    color: #1c3144;
+    text-align: center;
+    box-sizing: border-box;
+    outline: none;
+    display: block;
+    width: 75%;
+    margin: auto;
+    padding: 7px;
+    border: none;
+    border-bottom: 1px solid #1c3144;
+    background: transparent;
+    margin-bottom: 10px;
+    height: 45px;
+}
+
+input[type="submit"]{
+    background-color: #7EA16B;
+    display: inline-block;
+    cursor: pointer;
+    color: #FFFFFF;
+    font-size: 14px;
+    padding: 8px 18px;
+    text-decoration: none;
+    text-transform: uppercase;
+    border-radius: 3px;
+}
+.signup-footer{
+    color: black;
+    margin-top : 125px;
+}
+.login-footer{
+    color: black;
+    margin-top : 30px;
+}
+a{
+    color: grey;
+}
+
 
 .modal {
     display: none; /* Hidden by default */
@@ -101,4 +208,42 @@ table, th, td {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+.add_team{
+    text-align: center;
+    width: 50%;
+    margin: auto;
+}
+
+.leaguelist{
+    margin-top: 15px;
+    border-radius: 3px;
+    background: #7EA16B;
+    height: 25px;
+}
+
+.select-style {
+    margin: auto;
+    margin-top: 15px;
+    text-align: center;
+    border: 1px solid #ccc;
+    width: 240px;
+    border-radius: 3px;
+    overflow: hidden;
+    background: #7EA16B;
+}
+
+.select-style select {
+    padding: 5px 8px;
+    width: 130%;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    background-image: none;
+    -webkit-appearance: none;
+}
+
+.select-style select:focus {
+    outline: none;
 }
