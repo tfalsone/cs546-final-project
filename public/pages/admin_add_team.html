@@ -1,19 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>8008Leagues</title>
-		<meta charset="UTF-8">
+    <head>
+        <title>8008Leagues</title>
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="../css/main.css">
-		<link rel="stylesheet" href="../css/home_page.css">
-		<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+        <link rel="stylesheet" href="../css/Hunter2.css">
+        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    </head>
+    <body onload="setVars()">
         <script>
             function setVars(){
-            document.getElementById("teams").innerHTML = <%- JSON.stringify(teams) %>;
+                var select = document.getElementById("leaguelist"); 
+                var leaguelst = <%- JSON.stringify(leagues) %>;
+
+                for(var i = 0; i < leaguelst.length; i++) {
+                    var opt = leaguelst[i].name;
+                    var el = document.createElement("option");
+                    el.textContent = opt;
+                    el.value = opt;
+                    select.appendChild(el);
+                }
             }
         </script>
-	</head>
-	<body onload="setVars()">
-        <p id="teams"></p>
-	</body>
+        <main>
+            <header class="header">
+                <a href="/home" class="left">8008Leagues</a>
+                <div class="center">
+                    <a href="/teams">Teams</a>
+                    <a href="/leagues">Leagues</a>
+                    <a href="/profile">Profile</a>
+                </div>
+            </header>
+
+            <form class="add_team">
+                <h1>Add New Team</h1>
+                <div class="select-style">
+                    <select class="dropdown" id="leaguelist">
+                        <option value="" disabled selected>Select league to add team to</option>
+                    </select>
+                </div>
+                <input class="leaguename" placeholder="Team Name">
+                <input class="btn" type="submit" value="Get the game started!"/>
+            </form>
+        </main>
+    </body>
 </html>
