@@ -50,15 +50,26 @@ const constructorMethod = app => {
                     console.log("No password provided");
                     res.redirect("/login");
                 } else {
-                    var passAuth = bcrypt.compare(pass, currUser.hashPwd);
-                    if (passAuth) {
+                    bcrypt.compare(pass, currUser.hashPwd, function(err, result) {
+                        if (result) {
+                            console.log("Password confirmed");
+                            res.cookie("AuthCookie", currUser._id);
+                            res.redirect("/home");
+                        } else {
+                            console.log("Incorrect password");
+                            res.redirect("/login");
+                        }
+                    });
+                    /*
+                    if (bcrypt.compareSync(pass, currUser.hashPwd)) {
                         console.log("Password confirmed");
-                        res.cookie("AuthCookie", currUser);
+                        res.cookie("AuthCookie", currUser._id);
                         res.redirect("/home");
                     } else {
                         console.log("Incorrect password");
                         res.redirect("/login");
                     }
+                    */
                 }
             }
         }        

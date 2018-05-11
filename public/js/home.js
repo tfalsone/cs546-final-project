@@ -1,30 +1,4 @@
 $(document).ready(function() {
-    /*
-    var team1id = game["team1"];
-    var team2id = game["team2"];
-    var leagueId = game["leagueId"];
-    var team1score = game["score"]["team1Score"];
-    var team2score = game["score"]["team2Score"];
-    var hours = datetime.getHours();
-    var suffix = (hours >= 12)? 'pm' : 'am';
-    hours = (hours > 12)? hours -12 : hours;
-    hours = (hours == '00')? 12 : hours;
-    var minutes = zeroPad(datetime.getMinutes(), 2);
-
-    console.log("Team 1 Score: " + team1score);
-    console.log("Team 2 score: " + team2score);
-    console.log("Day of Week: " + weekday[datetime.getDay()]);
-    console.log("Month and Day: " + month[datetime.getMonth()] + ", " + datetime.getDate());
-    console.log("Time: " + hours + ":" + minutes + " " + suffix);
-    */
-
-    var data = JSON.stringify({
-        "firstName": "Thomas",
-        "lastName": "Falsone",
-        "email": "tfalsone@stevens.edu",
-        "password": "PoopDollar"
-    });
-
     var weekday = new Array(7);
     weekday[0] =  "Sunday";
     weekday[1] = "Monday";
@@ -75,13 +49,6 @@ $(document).ready(function() {
                     console.log(e);
                 }
             }).done(function(leagues, status) {
-                //console.log("Games:");
-                //console.log(games);
-                //console.log("Teams:");
-                //console.log(teams);
-                //console.log("Leagues:");
-                //console.log(leagues);
-
                 games.forEach(function(game) {
                     var datetime = new Date(game["time"]);
                     if (datetime < new Date()) {
@@ -146,7 +113,7 @@ $(document).ready(function() {
                         </div>
                         `;
 
-                        $("div.container").append(newCard);
+                        $("div.container").prepend(newCard);
                     }
                 });
             });
