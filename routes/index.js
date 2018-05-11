@@ -48,26 +48,26 @@ const constructorMethod = app => {
                 .then(user => {
                     currUser = user;
                     if(currUser == "") {
+                        console.log("User does not exist");
                         res.redirect("/login");
                     } else {
                         var pass = req.body.password;
-                        if (pass = "") {
+                        if (pass == "") {
                             console.log("No password provided");
                             res.redirect("/login");
                         } else {
-                            bcrypt.compare(pass, user.hashPwd)
-                            .then(passAuth => {
-                                if (passAuth) {
-                                    console.log("Password confirmed");
-                                    res.cookie("AuthCookie", currUser);
-                                    res.redirect("/home");
-                                } else {
-                                    console.log("Incorrect password");
-                                    res.redirect("/login");
-                                }
-                            }).catch(err => {
-                                console.log(err);
-                            });
+                            console.log(pass);
+                            console.log(user);
+                            console.log(user["hashPwd"]);
+                            var passAuth = bcrypt.compareSync(pass, user["hashPwd"]);
+                            if (passAuth) {
+                                console.log("Password confirmed");
+                                res.cookie("AuthCookie", currUser);
+                                res.redirect("/home");
+                            } else {
+                                console.log("Passwords do not match");
+                                res.redirect("/login");
+                            }
                         }
                     }
                 }).catch(err => {
