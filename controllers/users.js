@@ -47,7 +47,7 @@ exports.createUser = (req, res) => {
         });
     }
 
-    hash = bcrypt.hash(req.body.password, saltRounds);
+    hash = bcrypt.hashSync(req.body.password, saltRounds);
     
     const user = new User({
         _id: uuid.v4(),
