@@ -42,6 +42,7 @@ exports.getUserByEmail = function (email) {
             if (!user) {
 
                 console.log("User not found with email " + email);
+                return "";
             }
             return user
             //res.send(user);

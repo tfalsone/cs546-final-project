@@ -44,33 +44,36 @@ const constructorMethod = app => {
                 console.log("No username indicated");
                 res.redirect("/login");
             } else {
-                currUser = userController.getUserByEmail(email);
-                var pass = req.body.password;
-                if (pass = "") {
-                    console.log("No password provided");
-                    res.redirect("/login");
-                } else {
-                    bcrypt.compare(pass, currUser.hashPwd, function(err, result) {
-                        if (result) {
-                            console.log("Password confirmed");
-                            res.cookie("AuthCookie", currUser._id);
-                            res.redirect("/home");
-                        } else {
-                            console.log("Incorrect password");
-                            res.redirect("/login");
-                        }
-                    });
-                    /*
-                    if (bcrypt.compareSync(pass, currUser.hashPwd)) {
-                        console.log("Password confirmed");
-                        res.cookie("AuthCookie", currUser._id);
-                        res.redirect("/home");
-                    } else {
-                        console.log("Incorrect password");
+                userController.getUserByEmail(email)
+                .then(user => {
+                    console.log(user);
+                    var currUser = user;
+                    if(currUser == "") {
                         res.redirect("/login");
+                    } else {
+                        var pass = req.body.password;
+                        if (pass = "") {
+                            console.log("No password provided");
+                            res.redirect("/login");
+                        } else {
+                            bcrypt.compare(pass, user.hashPwd)
+                            .then(passAuth => {
+                                if (passAuth) {
+                                    console.log("Password confirmed");
+                                    res.cookie("AuthCookie", currUser);
+                                    res.redirect("/home");
+                                } else {
+                                    console.log("Incorrect password");
+                                    res.redirect("/login");
+                                }
+                            }).catch(err => {
+                                console.log(err);
+                            });
+                        }
                     }
-                    */
-                }
+                }).catch(err => {
+                    console.log(err);
+                });
             }
         }        
     });
