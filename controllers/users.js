@@ -56,7 +56,8 @@ exports.createUser = (req, res) => {
         email: req.body.email,
         teams: req.body.teams || [],
         leagues: req.body.leagues || [],
-        hashPwd: hash,
+        // hashPwd: hash,
+        hashPwd: req.body.password,
         profileType: "player",
         // todo - what to do with sessionId?
         sessionId: "Temp"
