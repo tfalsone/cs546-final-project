@@ -47,7 +47,7 @@ const constructorMethod = app => {
                 userController.getUserByEmail(email)
                 .then(user => {
                     console.log(user);
-                    var currUser = user;
+                    var currUser = user[0];
                     if(currUser == "") {
                         console.log("User does not exist");
                         res.redirect("/login");
@@ -58,9 +58,9 @@ const constructorMethod = app => {
                             res.redirect("/login");
                         } else {
                             console.log(pass);
-                            console.log(user);
-                            console.log(user["hashPwd"]);
-                            var passAuth = bcrypt.compareSync(pass, user["hashPwd"]);
+                            console.log(currUser);
+                            console.log(currUser.hashPwd);
+                            var passAuth = bcrypt.compareSync(pass, currUser.hashPwd);
                             if (passAuth) {
                                 console.log("Password confirmed");
                                 res.cookie("AuthCookie", currUser);
@@ -86,7 +86,7 @@ const constructorMethod = app => {
     app.post("/register", (req, res) => {
         var firstname = req.body.firstname;
         var lastname = req.body.lastname;
-        var email = req.body.lastname;
+        var email = req.body.email;
         var password = req.body.password;
         var confirm_pass = req.body.password_conf;
 
