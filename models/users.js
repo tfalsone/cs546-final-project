@@ -5,7 +5,8 @@ const mongoose = require('mongoose')
 var Schema = mongoose.Schema
 
 const userSchema = Schema({
-    _id: Schema.Types.ObjectId,
+    // _id: Schema.Types.ObjectId,
+    _id: String,
     sessionId: String,
     lastName: String,
     firstName: String,
@@ -14,8 +15,8 @@ const userSchema = Schema({
         unique: true
     },
     hashPwd: String,
-    teams: [Schema.Types.ObjectId],
-    leagues: [Schema.Types.ObjectId],
+    teams: [String],
+    leagues: [String],
     profileType: String
 });
 
