@@ -8,8 +8,8 @@ const league = require('../controllers/leagues');
 router.get("/", (req, res) => {
     league.findAll()
     .then(leagues => {
-    //res.send(leagues);
     console.log(leagues);
+    res.send(leagues);
     res.render("admin_add_team", {leagues});
     });
 });

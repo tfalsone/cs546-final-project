@@ -8,6 +8,6 @@ router.get("/profile/:userId", page.getProfile);
 
 router.get("/addTeam", page.getAddTeam);
 
-router.get("/teams", page.getTeams);
+router.get("/teams/:userId", page.getTeams);
 
 module.exports = router;

@@ -234,7 +234,16 @@ exports.getProfile = async (req, res) => {
     //res.redirect("../profile");
 };
 
-exports.getAddTeam = (req, res) => {
+exports.getAddTeam = async (req, res) => {
+    league.findAll()
+    .then(leagues => {
+    console.log(leagues);
+    //res.send(leagues);
+    res.render("admin_add_team", {leagues});
+    });
+};
+
+exports.getAddLeague = (req, res) => {
 
 };
 
