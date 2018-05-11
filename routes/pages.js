@@ -12,4 +12,6 @@ router.get("/teams/:userId", page.getTeams);
 
 router.get("/AddLeague", page.getAddLeague);
 
+router.get("/leagues/:userId", page.getLeague);
+
 module.exports = router;
