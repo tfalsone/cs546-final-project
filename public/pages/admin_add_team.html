@@ -9,6 +9,8 @@
         <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     </head>
     <body onload="setVars()">
+        
+        
         <script>
             function setVars(){
                 var select = document.getElementById("leaguelist"); 
@@ -18,11 +20,14 @@
                     var opt = leaguelst[i].name;
                     var el = document.createElement("option");
                     el.textContent = opt;
-                    el.value = opt;
+                    el.value = leaguelst[i]._id;
+                    el.setAttribute("name", "leagueID");
                     select.appendChild(el);
                 }
             }
         </script>
+        
+        
         <main>
             <header class="header">
                 <a href="/home" class="left">8008Leagues</a>
@@ -33,14 +38,14 @@
                 </div>
             </header>
 
-            <form class="add_team">
+            <form class="add_team" action="/teams" method="post">
                 <h1>Add New Team</h1>
                 <div class="select-style">
                     <select class="dropdown" id="leaguelist">
                         <option value="" disabled selected>Select league to add team to</option>
                     </select>
                 </div>
-                <input class="leaguename" placeholder="Team Name">
+                <input class="leaguename" placeholder="Team Name" name="name">
                 <input class="btn" type="submit" value="Get the game started!"/>
             </form>
         </main>
