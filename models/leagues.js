@@ -4,6 +4,7 @@ const data = require("../data/");
 const leagues = data.leagues;
 var Schema = mongoose.Schema
 
+/*
 const leagueSchema = Schema({
     id: String,
     name: String,
@@ -17,5 +18,5 @@ const leagueSchema = Schema({
         score: {team1: int, team2: int}
     }]
 });
-
-module.exports = mongoose.model('League', leagueSchema);
+*/
+//module.exports = mongoose.model('League', leagueSchema);
