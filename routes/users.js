@@ -1,44 +1,21 @@
 const express = require("express");
 const router = express.Router();
-const data = require("../data");
-const userData = data.users;
+const user = require('../controllers/users');
 
-router.get("/:id", (req, res) => {
-    userData
-        .getUserById(req.params.id)
-        .then(user => {
-            res.json(user);
-        })
-        .catch(() => {
-            res.status(404).json({ error: "User not found" });
-        });
-});
+router.get("/", user.getAllUsers);
 
-router.post("/", (req, res) => {
-    let userInfo = req.body;
+router.post("/", user.createUser);
 
-    if (!userInfo) {
-        res.status(400).json({ error: "You must provide data to create a new user" });
-        return;
-    }
+router.get("/:userId", user.getUserById);
 
-    if (!userInfo.firstName) {
-        res.status(400).json({ error: "You must provide a first name" });
-        return;
-    }
-    
-    if (!userInfo.lastName) {
-        res.status(400).json({ error: "You must provide a last name" });
-        return;
-    }
+router.delete("/:userId", user.removeUser);
 
-    if (!userInfo.email) {
-        res.status(400).json({ error: "You must provide an email address" });
-        return;
-    }
+router.put("/addTeam/:userId", user.addTeam);
 
-    if (!userInfo.password) {
-        res.status(400).json({ error: "You must provide a last name" });
-        return;
-    }
-})
+router.put("/addLeague/:userId", user.addLeague);
+
+router.delete("/removeTeam/:userId/:teamId", user.removeTeam);
+
+router.delete("/removeLeague/:userId/:leagueId", user.removeLeague);
+
+module.exports = router;

@@ -7,7 +7,7 @@ const static = express.static(__dirname + '/public');
 
 
 const constructorMethod = app => {
-    //app.use("/users", userRoutes);
+    app.use("/users", userRoutes);
     //app.use("/teams", teamRoutes);
     app.use("/leagues", leagueRoutes);
 
