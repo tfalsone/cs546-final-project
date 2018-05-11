@@ -43,7 +43,7 @@ router.delete("/:leagueId", (req, res) => {
             res.redirect("/home");
         }else {
             res.status(404).send({
-                message: "League not deleted " + leagueId
+                message: "League not deleted " + req.params.leagueId
             });                
         }
     });

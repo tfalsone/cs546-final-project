@@ -81,7 +81,7 @@ router.delete("/:teamId", (req, res) => {
             res.redirect("/home");
         }else {
             res.status(404).send({
-                message: "Team not deleted " + teamId
+                message: "Team not deleted " + req.params.teamId
             });                
         }
     });

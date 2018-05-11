@@ -4,211 +4,181 @@ const bcrypt = require("bcryptjs");
 const saltRounds = 16;
 
 // return all users from database
-exports.getAllUsers = (req, res) => {
-    User.find()
+exports.getAllUsers = function() {
+    return User.find()
     .then(users => {
-        res.send(users);
+        return users;
+        //res.send(users);
     }).catch(err => {
-        res.status(500).send({
-            message: err.message || "Unable to get all users"
-        });
+        
+            console.log(err.message || "Unable to get all users");
     });
 };
 
-exports.getUserById = (req, res) => {
-    User.findById(req.params.userId)
+exports.getUserById = function(userId) {
+    return User.findById(userId)
     .then(user => {
         if (!user) {
-            return res.status(404).send({
-                message: "User not found with id " + req.params.userId
-            });
+            
+                console.log("User not found with id " + userId);
         }
-        res.send(user);
+        return user;
+        //res.send(user);
     }).catch(err => {
         if(err.kind === 'String') {
-            return res.status(404).send({
-                message: "User not found with id " + req.params.userId
-            });
+            
+                console.log("User not found with id " + userId);
         }
-        return res.status(500).send({
-            message: "Error retrieving User with id " + req.params.userId
-        });
+        
+            console.log("Error retrieving User with id " + userId);
     });
 };
 
-exports.getUserByEmail = (req, res) => {
-    User.find({ email: req.body.email })
+exports.getUserByEmail = function(email) {
+    return User.find({ email: email })
     .then(user => {
         if (!user) {
-            return res.status(404).send({
-                message: "User not found with email " + req.body.email
-            });
+            
+                console.log("User not found with email " + email);
         }
-        res.send(user);
+        return user
+        //res.send(user);
     }).catch(err => {
         if(err.kind === 'String') {
-            return res.status(404).send({
-                message: "User not found with email " + req.body.email
-            });
+            
+            console.log("User not found with email " + email);
         }
-        return res.status(500).send({
-            message: "Error retrieving User with email " + req.body.email
-        });
+        
+            console.log("Error retrieving User with email " + email);
     });
 };
 
 // add new user
-exports.createUser = (req, res) => {
-    console.log(req.body);
+exports.createUser = function(firstName, lastName, email, password) {
 
-    // error checking
-    if(!(req.body.firstName || req.body.lastName || req.body.email)) {
-        return res.status(400).send({
-            message: "One or more fields are missing"
-        });
-    }
-
-    hash = bcrypt.hashSync(req.body.password, saltRounds);
+    hash = bcrypt.hashSync(password, saltRounds);
     
     const user = new User({
         _id: uuid.v4(),
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        teams: req.body.teams || [],
-        leagues: req.body.leagues || [],
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        teams: [],
+        leagues: [],
         hashPwd: hash,
-        // hashPwd: req.body.password,
+        // hashPwd: password,
         profileType: "player",
         // todo - what to do with sessionId?
         sessionId: "Temp"
     });
 
-    user.save()
+    return user.save()
     .then(data => {
-        res.send(data);
+        return user;
+        //res.send(data);
     }).catch(err=> {
-        res.status(500).send({
-            message: err.message || "An error occured when creating the new player"
-        });
+        
+            console.log(err.message || "An error occured when creating the new player");
     });
 };
 
-exports.removeUser = (req, res) => {
-    User.findByIdAndRemove(req.params.userId)
+exports.removeUser = function(userId) {
+    return User.findByIdAndRemove(userId)
     .then(user => {
         if(!user) {
-            return res.status(404).send({
-                message: "User not found with id " + req.params.userId
-            });
+            
+                console.log("User not found with id " + userId);
         }
 
-        res.send({ message: "User deleted" });
+        console.log("User deleted" );
+        return true;
     }).catch(err => {
         if(err.kind === 'String' || err.name === 'NotFound') {
-            return res.status(404).send({
-                message: "User not found with id " + req.params.userId
-            });
+            
+                console.log("User not found with id " + userId);
         }
-        return res.status.send({
-            message: "Could not delete User with id " + req.params.userId
-        });
+            console.log("Could not delete User with id " + userId);
     });
 };
 
-exports.addTeam = (req, res) => {
-    User.findById(req.params.userId)
+exports.addTeam = function(userId, teamId) {
+    return User.findById(userId)
     .then(user => {
         if(!user) {
-            return res.status(404).send({
-                message: "!!User not found with id " + req.params.userId
-            });
+            
+                console.log("!!User not found with id " + userId);
         }
         
-        user.teams.push(req.body.teamId);
+        user.teams.push(teamId);
         user.save();
-
-        res.send(user);
+        return user;
+        //res.send(user);
     }).catch(err => {
         if(err.kind === 'String' || err.name === 'NotFound') {
-            return res.status(404).send({
-                message: "User not found with id " + req.params.userId
-            });
+            
+                console.log("User not found with id " + userId);
         }
-        return res.status.send({
-            message: "Could not add team with id " + req.params.userId
-        });
+            console.log("Could not add team with id " + userId);
     });
 };
 
-exports.addLeague = (req, res) => {
-    User.findById(req.params.userId)
+exports.addLeague = function(userId, leagueId) {
+    return User.findById(userId)
     .then(user => {
         if(!user) {
-            return res.status(404).send({
-                message: "User not found with id " + req.params.userId
-            });
+            
+                console.log("User not found with id " + userId);
         }
-        user.leagues.push(req.body.leagueId);
+        user.leagues.push(leagueId);
         user.save();
-
-        res.send(user);
+        return user;
+        //res.send(user);
     }).catch(err => {
         if(err.kind === 'String' || err.name === 'NotFound') {
-            return res.status(404).send({
-                message: "User not found with id " + req.params.userId
-            });
+            
+            console.log("User not found with id " + userId);
         }
-        return res.status.send({
-            message: "Could not add league with id " + req.params.leagueId
-        });
+            console.log("Could not add league with id " + leagueId);
     });
 };
 
-exports.removeTeam = (req, res) => {
-    User.findById(req.params.userId)
+exports.removeTeam = function(userId, teamId) {
+    return User.findById(userId)
     .then(user => {
         if(!user) {
-            return res.status(404).send({
-                message: "User not found with id " + req.params.userId
-            });
+            
+                console.log("User not found with id " + userId);
         }
-        user.teams.pull(req.body.teamId);
+        user.teams.pull(teamId);
         user.save();
-
-        res.send({ message: "Team deleted from user profile" });
+        console.log("Team deleted from user profile" );
+        return user;
     }).catch(err => {
         if(err.kind === 'String' || err.name === 'NotFound') {
-            return res.status(404).send({
-                message: "User not found with id " + req.params.userId
-            });
+            
+                console.log("User not found with id " + userId);
         }
-        return res.status.send({
-            message: "Could not delete team with id " + req.params.teamId
-        });
+            console.log("Could not delete team with id " + teamId);
     });
 };
 
-exports.removeLeague = (req, res) => {
-    User.findById(req.params.userId)
+exports.removeLeague = function(userId, leagueId) {
+    return User.findById(userId)
     .then(user => {
         if(!user) {
-            return res.status(404).send({
-                message: "User not found with id " + req.params.userId
-            });
+            
+                console.log("User not found with id " + userId);
         }
-        user.leagues.pull(req.body.leagueId);
+        user.leagues.pull(leagueId);
         user.save();
 
-        res.send({ message: "League deleted from user profile" });
+        console.log("League deleted from user profile" );
+        return user;
     }).catch(err => {
         if(err.kind === 'String' || err.name === 'NotFound') {
-            return res.status(404).send({
-                message: "User not found with id " + req.params.userId
-            });
+            
+                console.log("User not found with id " + userId);
         }
-        return res.status.send({
-            message: "Could not delete league with id " + req.params.leagueId
-        });
+            console.log("Could not delete league with id " + leagueId);
     });
 };
