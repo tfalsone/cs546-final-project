@@ -4,10 +4,12 @@ const leagueRoutes = require("./leagues");
 const teamRoutes = require("./teams");
 const gameRoutes = require("./games");
 const pageRoutes = require("./pages");
-const leagueController = require("./../controllers/leagues");
 const path = require("path");
 const static = express.static(__dirname + '/public');
+const leagueController = require("./../controllers/leagues");
 const userController = require("./../controllers/users");
+const gameController = require("./../controllers/games");
+const teamController = require("./../controllers/teams");
 const bcrypt = require("bcryptjs");
 
 const cookieParser = require('cookie-parser');
@@ -163,6 +165,20 @@ const constructorMethod = app => {
             //res.render("admin_add_team", {leagues});
             });
     });
+
+    app.get("/teamsPage", (req, res, next) => {
+        if (!(req.cookies.AuthCookie)) {
+            console.log("Unauthorized: User is not logged in");
+            res.redirect("/");
+        }
+        next();
+    });
+
+    app.get("/teamsPage", (req, res) => {
+        res.send("TODO");
+    //page.getTeams
+    });
+    
 
 
     app.get("/", (req, res) => {
