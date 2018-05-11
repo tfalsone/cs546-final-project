@@ -25,6 +25,11 @@
                     select.appendChild(el);
                 }
             }
+            function setId(){
+                var select = document.getElementById("leaguelist");
+                select.setAttribute("value",select.options[select.selectedIndex].value);
+                
+            }
         </script>
         
         
@@ -41,12 +46,12 @@
             <form class="add_team" action="/teams" method="post">
                 <h1>Add New Team</h1>
                 <div class="select-style">
-                    <select class="dropdown" id="leaguelist">
+                    <select class="dropdown" id="leaguelist" name="leagueId">
                         <option value="" disabled selected>Select league to add team to</option>
                     </select>
                 </div>
                 <input class="leaguename" placeholder="Team Name" name="name">
-                <input class="btn" type="submit" value="Get the game started!"/>
+                <input class="btn" type="submit" value="Get the game started!" onclick="setId()" />
             </form>
         </main>
     </body>
