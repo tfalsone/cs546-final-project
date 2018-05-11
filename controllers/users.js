@@ -25,13 +25,34 @@ exports.getUserById = (req, res) => {
         }
         res.send(user);
     }).catch(err => {
-        if(err.kind === 'ObjectId') {
+        if(err.kind === 'String') {
             return res.status(404).send({
                 message: "User not found with id " + req.params.userId
             });
         }
         return res.status(500).send({
             message: "Error retrieving User with id " + req.params.userId
+        });
+    });
+};
+
+exports.getUserByEmail = (req, res) => {
+    User.find({ email: req.body.email })
+    .then(user => {
+        if (!user) {
+            return res.status(404).send({
+                message: "User not found with email " + req.body.email
+            });
+        }
+        res.send(user);
+    }).catch(err => {
+        if(err.kind === 'String') {
+            return res.status(404).send({
+                message: "User not found with email " + req.body.email
+            });
+        }
+        return res.status(500).send({
+            message: "Error retrieving User with email " + req.body.email
         });
     });
 };
@@ -47,7 +68,7 @@ exports.createUser = (req, res) => {
         });
     }
 
-    hash = bcrypt.hash(req.body.password, saltRounds);
+    hash = bcrypt.hashSync(req.body.password, saltRounds);
     
     const user = new User({
         _id: uuid.v4(),
@@ -56,8 +77,8 @@ exports.createUser = (req, res) => {
         email: req.body.email,
         teams: req.body.teams || [],
         leagues: req.body.leagues || [],
-        // hashPwd: hash,
-        hashPwd: req.body.password,
+        hashPwd: hash,
+        // hashPwd: req.body.password,
         profileType: "player",
         // todo - what to do with sessionId?
         sessionId: "Temp"
@@ -84,7 +105,7 @@ exports.removeUser = (req, res) => {
 
         res.send({ message: "User deleted" });
     }).catch(err => {
-        if(err.kind === 'ObjectId' || err.name === 'NotFound') {
+        if(err.kind === 'String' || err.name === 'NotFound') {
             return res.status(404).send({
                 message: "User not found with id " + req.params.userId
             });
@@ -109,7 +130,7 @@ exports.addTeam = (req, res) => {
 
         res.send(user);
     }).catch(err => {
-        if(err.kind === 'ObjectId' || err.name === 'NotFound') {
+        if(err.kind === 'String' || err.name === 'NotFound') {
             return res.status(404).send({
                 message: "User not found with id " + req.params.userId
             });
@@ -133,7 +154,7 @@ exports.addLeague = (req, res) => {
 
         res.send(user);
     }).catch(err => {
-        if(err.kind === 'ObjectId' || err.name === 'NotFound') {
+        if(err.kind === 'String' || err.name === 'NotFound') {
             return res.status(404).send({
                 message: "User not found with id " + req.params.userId
             });
@@ -157,7 +178,7 @@ exports.removeTeam = (req, res) => {
 
         res.send({ message: "Team deleted from user profile" });
     }).catch(err => {
-        if(err.kind === 'ObjectId' || err.name === 'NotFound') {
+        if(err.kind === 'String' || err.name === 'NotFound') {
             return res.status(404).send({
                 message: "User not found with id " + req.params.userId
             });
@@ -181,7 +202,7 @@ exports.removeLeague = (req, res) => {
 
         res.send({ message: "League deleted from user profile" });
     }).catch(err => {
-        if(err.kind === 'ObjectId' || err.name === 'NotFound') {
+        if(err.kind === 'String' || err.name === 'NotFound') {
             return res.status(404).send({
                 message: "User not found with id " + req.params.userId
             });
