@@ -4,6 +4,7 @@ const leagueRoutes = require("./leagues");
 const teamRoutes = require("./teams");
 const gameRoutes = require("./games");
 const pageRoutes = require("./pages");
+const leagueController = require("./../controllers/leagues");
 const path = require("path");
 const static = express.static(__dirname + '/public');
 const userController = require("./../controllers/users");
@@ -143,6 +144,24 @@ const constructorMethod = app => {
 
     app.get("/addLeague", (req, res) => {
         res.render("admin_add_league");
+    });
+
+
+    app.use("/addTeam", (req, res, next) => {
+        if (!(req.cookies.AuthCookie)) {
+            console.log("Unauthorized: User is not logged in");
+            res.redirect("/");
+        }
+        next();
+    });
+
+    app.get("/addTeam", (req, res) => {
+        leagueController.findAll()
+        .then(leagues => {
+            console.log(leagues);
+            res.render("admin_add_team", {leagues});
+            //res.render("admin_add_team", {leagues});
+            });
     });
 
 

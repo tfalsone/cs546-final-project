@@ -129,16 +129,6 @@ exports.getProfile = async (req, res) => {
     //res.redirect("../profile");
 };
 
-exports.getAddTeam = function() {
-    return league.findAll()
-    .then(leagues => {
-    console.log(leagues);
-    return leagues;
-    //res.send(leagues);
-    res.render("admin_add_team", {leagues});
-    });
-};
-
 exports.getTeams = async (req, res) => {
     let teams = await Team.find({
         "roster": req.params.userId
