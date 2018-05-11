@@ -20,8 +20,8 @@ router.post("/", (req, res) => {
     }
     team.createTeam(req.body.name, req.body.leagueId)
     .then(t => {
-        res.send(t);
-        //res.render("admin_add_team", {leagues});
+        //res.send(t);
+        res.redirect("pages/addTeam");
     });
 
 });

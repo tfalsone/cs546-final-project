@@ -17,9 +17,9 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
 app.use(static);
-//app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.urlencoded({extended: true}))
 
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
 seeder.seedDB();
 // Connecting to the database
 /*mongoose.connect(fullMongoUrl, { keepAlive: 120 })
