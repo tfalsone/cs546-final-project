@@ -22,6 +22,14 @@ const constructorMethod = app => {
 
     var currUser = "";
 
+    app.use("/login", (req, res, next) => {
+        if (req.cookies.AuthCookie) {
+            console.log("User is already logged in");
+            res.redirect("/home");
+        }
+        next();
+    });
+
     app.get("/login", (req, res) => {
         res.sendFile(path.join(__dirname + '/../public/pages/login.html'));
     });
@@ -56,16 +64,39 @@ const constructorMethod = app => {
         }        
     });
 
+    app.get("/register", (req, res) => {
+        console.log("register");
+        res.sendFile(path.join(__dirname + '/../public/pages/sign_up.html'));
+    });
+
+    app.post("/register", (req, res) => {
+        var firstname = req.body.firstname;
+        var lastname = req.body.lastname;
+        var email = req.body.lastname;
+        var password = req.body.password;
+        var confirm_pass = req.body.password_conf;
+
+        if (password != confirm_pass) {
+            console.log("Passwords do not match");
+            res.redirect("/register");
+        } else {
+            currUser = userController.createUser(firstname, lastname, email, password);
+            console.log(currUser);
+            res.cookie("AuthCookie", currUser);
+            res.redirect("/home");
+        }
+    });
+
     app.get("/logout", (req, res) => {
         res.clearCookie("AuthCookie");
         currUser = "";
-        res.status(200).send("User has been logged out");
+        console.log("User has been logged out");
         res.redirect("/");
     });
 
     app.use("/home", (req, res, next) => {
         if (!(req.cookies.AuthCookie)) {
-            res.status(403).send("Unauthorized: User is not logged in");
+            console.log("User is already logged in");
             res.redirect("/");
         }
         next();
@@ -77,7 +108,7 @@ const constructorMethod = app => {
 
     app.use("/profile", (req, res, next) => {
         if (!(req.cookies.AuthCookie)) {
-            res.status(403).send("Unauthorized: User is not logged in");
+            console.log("Unauthorized: User is not logged in");
             res.redirect("/");
         }
         next();

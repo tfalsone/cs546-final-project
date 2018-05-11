@@ -93,21 +93,60 @@ $(document).ready(function() {
                         hours = zeroPad(hours, 2);
                         var minutes = zeroPad(datetime.getMinutes(), 2);
                         var suffix = (hours >= 12)? 'pm' : 'am';
+                        var dateString = day + ", " + date + " @ " + hours + ":" + minutes + " " + suffix;
                         var league = leagues.find(function(league) {
                             return league["_id"] == game["leagueId"];
                         });
+                        var leagueName = league["name"];
+                        var leagueSport = league["sport"];
                         var team1 = teams.find(function(team) {
                             return team["_id"] == game["team1"];
                         });
+                        var team1Name = team1["name"];
+                        var team1Score = game["score"]["team1Score"];
                         var team2 = teams.find(function(team) {
                             return team["_id"] == game["team2"];
                         });
+                        var team2Name = team2["name"];
+                        var team2Score = game["score"]["team2Score"];
 
-                        console.log("League: " + league["name"] + "\tSport: " + league["sport"]);
-                        console.log("Team 1 (" + team1["name"] + ") VS Team 2 (" + team2["name"] + ")");
-                        console.log("Team 1: " + game["score"]["team1Score"] + "\tTeam 2: " + game["score"]["team2Score"]);
-                        console.log(day + ", " + date + " @ " + hours + ":" + minutes + " " + suffix);
+                        console.log("League: " + leagueName + "\tSport: " + leagueSport);
+                        console.log("Team 1 (" + team1Name + ") VS Team 2 (" + team2Name + ")");
+                        console.log("Team 1: " + team1Score + "\tTeam 2: " + team2Score);
+                        console.log(dateString);
                         console.log("\n");
+
+                        var newCard = `
+                        <div class='card'>
+                            <div class="top underline">
+                                <h3 id="league"><b>` + leagueName + `</b></h3>
+                                <h3 id="sport"><b>` + leagueSport + `</b></h3>
+                            </div>
+                            <div class="final">
+                                <p>Final</p>
+                            </div>
+                            <div class="results">
+                                <div class="team1">
+                                    <p id="team_name">` + team1Name + `</p>
+                                    <br>
+                                    <p id="score">` + team1Score + `</p>
+                                </div>
+                                <div class="team2">
+                                    <p id="team_name">` + team2Name + `</p>
+                                    <br>
+                                    <p id="score">` + team2Score + `</p>
+                                </div>
+                                <div class="vs">
+                                    <img src="/img/vs.png">
+                                </div>
+                            </div>
+                            <div class="date">
+                                <p>` + dateString + `</p>
+                            </div>
+                        </div>
+                        `;
+
+                        $("div.container").append(newCard);
                     }
                 });
             });

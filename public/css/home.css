@@ -32,6 +32,7 @@
 
 .container .card {
     padding: 8px 32px;
+    margin-bottom: 24px;
 }
 
 .container .top {
