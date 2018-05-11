@@ -9,7 +9,7 @@ const game = require('./games');
 
 
 exports.getHome = async (req, res) => {
-    let currentUser = await User.findById(req.params.userId)
+    let teams = await Team.find({"roster": req.params.userId})
     .then(user => {
         if (!user) {
             return res.status(404).send({
@@ -27,12 +27,13 @@ exports.getHome = async (req, res) => {
             message: "Error retrieving User with id " + req.params.userId
         });
     });
-
+    let teamIdArray = teams.map(a => a._id);
+    //console.log(teamIdArray);
 
     let recentGames = await Game.find( {  $and: [
         {
         $or: 
-        [ {"team1": currentUser._id} , {"team2": currentUser._id} ]
+        [ {"team1": teamIdArray} , {"team2": teamIdArray} ]
     }, 
     {"time": {"$lt": new Date()} }] })
     .then(games => {
@@ -54,7 +55,7 @@ exports.getHome = async (req, res) => {
     });
 
     let leagueIdArray = recentGames.map(a => a.leagueId);
-    console.log(leagueIdArray);
+    //console.log(leagueIdArray);
 
     let leagues = await League.find( {"_id": { $in: leagueIdArray }}   )
     .then(leagues => {
@@ -70,12 +71,16 @@ exports.getHome = async (req, res) => {
     for(var i = 0; i < recentGames.length; i++){
         for(var j = 0; j < leagues.length; j++){
             if(leagues[j]._id == recentGames[i].leagueId){
+
+                let team1 = await team.findOne(recentGames[i].team1);
+                let team2 = await team.findOne(recentGames[i].team2);
+                
                 var tmp = {
                     leagueName: leagues[j].name,
                     leagueSport: leagues[j].sport,
                     _id: recentGames[i]._id,
-                    team1: recentGames[i].team1, 
-                    team2: recentGames[i].team2,
+                    team1: team1.name, 
+                    team2: team2.name,
                     time: recentGames[i].time,
                     location: recentGames[i].location,
                     score: {team1Score: recentGames[i].team1Score, team2Score: recentGames[i].team2Score}
