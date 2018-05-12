@@ -238,8 +238,6 @@ const constructorMethod = app => {
         next();
     });
 
-
-
     app.get("/leaguesPage", async (req, res) => {
         let currentUser = req.cookies.AuthCookie;
         //console.log("UserId is: ", currentUser._id);
@@ -265,8 +263,10 @@ const constructorMethod = app => {
         //let leagues = await leagueController.findByUser(currentUser._id);
 
         console.log(leagues);*/
-        res.send(leagues);
-
+        //res.send(leagues);
+        res.render("leagues", {
+            leagues: leagues
+        });
     });
 
     app.get("/", (req, res) => {

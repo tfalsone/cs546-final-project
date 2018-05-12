@@ -1,0 +1,70 @@
+.search-container {
+    width: 100%;
+    padding: 20px;
+    background-color: #596F62;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 #596F62;
+}
+
+.search-container input[type=text] {
+    margin: 0 auto;
+    padding: 6px;
+    font-size: 16px;
+    border: none;
+    width: 100%;
+    border-radius: 5px;
+    color: #1C3144;
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+}
+
+.search-container input[type=text]:focus {
+    outline: none;
+}
+
+.card {
+    padding: 16px;
+    padding-top: 8px;
+    margin-bottom: 24px;
+}
+
+.card h3 {
+    padding-bottom: 4px;
+}
+
+.stats {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.stats ol {
+    list-style: none;
+    padding: 0px;
+    margin:0px;
+    display: inline-flex;
+    width: 100%;
+    text-align: center;
+}
+
+.stats li {
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.stats p {
+    margin: 0px;
+    height: 25px;
+}
+
+.stats p#description {
+    margin-bottom: 8px;
+    border-bottom: 1px solid #7EA16B;
+    padding-bottom: 4px;
+}
+
+.stats p#value {
+    color: #70161E;
+    font-size: 24px;
+    font-weight: bold;
+}

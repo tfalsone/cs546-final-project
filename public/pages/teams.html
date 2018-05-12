@@ -2,113 +2,56 @@
 <html lang="en">
     <head>
         <title>8008Leagues</title>
-        <meta charset="UTF-8">
+		<meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="../css/Hunter2.css">
+        <link rel="stylesheet" href="/css/main.css">
+		<link rel="stylesheet" href="/css/teams.css">
         <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </head>
-    <body onload="setVars()">
-        <script>
-            function setVars(){
-
-
-                var select = document.getElementById("teamlist"); 
-                var teamlst = <%- JSON.stringify(teams) %>;
-                for(var i = 0; i < teamlst.length; i++) {
-                    var el = document.createElement("option");
-                    el.textContent = teamlst[i].name;
-                    select.appendChild(el);
-                }
-            }
-
-            function fillInfo(currTeam){
-                var teamlst = <%- JSON.stringify(teams) %>;
-                var rosterlst = document.getElementById("roster");
-
-                for(var i = 0; i < teamlst.length; i++) {
-                    if(currTeam === teamlst[i].name){
-                        var roster = teamlst[i].roster;
-                        for(var j = 0; j < roster.length; j++) {
-                            var el = document.createElement("li");
-                            el.textContent = roster[j];
-                            rosterlst.appendChild(el);
-                        }
-                    }
-
-                    var pastlst = <%- JSON.stringify(recentGames) %>;
-                    console.log(pastlst)
-                    var past = document.getElementById("pastGames");
-
-                    for(var i = 0; i < pastlst.length; i++) {
-                        if(currTeam === pastlst[i].team1 || currTeam === pastlst[i].team2){
-                            var el = document.createElement("li");
-                            el.textContent = roster[j];
-                            rosterlst.appendChild(el);
-                        }
-                    }
-                }
-            }
-        </script>
+    <body>
+        <header class="header">
+            <a href="/home"><img onmouseover="this.src='/logo/logo_dark.png';" onmouseout="this.src='/logo/logo_green.png';" src="/logo/logo_green.png" width="245" height="57"></a>
+            <div class="center">
+                <a href="/teamsPage">Teams</a>
+                <a href="/leaguesPage">Leagues</a>
+                <a href="/profile">Profile</a>
+            </div>
+        </header>
         <main>
-            <header class="header">
-                <a href="/home" class="left">8008Leagues</a>
-                <div class="center">
-                    <a href="/teams">Teams</a>
-                    <a href="/leagues">Leagues</a>
-                    <a href="/profile">Profile</a>
-                </div>
-            </header>
-
-            <div class="select-style">
-                <select class="dropdown" id="teamlist" onchange="fillInfo(this.value)">
-                    <option value="" disabled selected>Select Team</option>
-                </select>
+            <div class="search-container">
+                <form onsubmit="search(event)">
+                    <input type="text" placeholder="Search teams..." name="search">
+                </form>
             </div>
 
-            <h1 id="teamname"></h1>
-
-            <section class="wrapper">
-                <div class="roster">
+            <div class="all-teams">
+                <h1>All Active Teams:</h1>
+                <div class="container">
+                    <!-- Card Template
                     <div class="card">
-                        <div class="container">
-                            <h1>Roster</h1>
-                            <ul id="roster">
-                            </ul>
-                            <ul id="players"></ul>
+                        <h3 class="underline">A Really Bad Team</h3>
+                        <div class="stats">
+                            <ol>
+                                <li class="numPlayers">
+                                    <p id="description" class="underline"># of Players</p>
+                                    <p id="value">3</p>
+                                </li>
+                                <li class="record">
+                                    <p id="description" class="underline">Record</p>
+                                    <p id="value">10 - 2</p>
+                                </li>
+                                <li class="numLeagues">
+                                    <p id="description" class="underline"># of Leagues</p>
+                                    <p id="value">1</p>
+                                </li>
+                            </ol>
                         </div>
                     </div>
+                    -->
                 </div>
-
-
-                <div class="schedule">
-                    <div class="card">
-                        <div class="container">
-                            <h1>Upcoming Games</h1>
-                            <div class="card" id="future1">
-                            </div>
-                            <div class="card" id="future2">
-                            </div>
-                            <div class="card" id="future3">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="stats">
-                    <div class="card">
-                        <div class="container">
-                            <h1>Past Games</h1>
-                            <div class="card" id="past1">
-                            </div>
-                            <div class="card" id="past2">
-                            </div>
-                            <div class="card" id="past3">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            </div>
         </main>
+        <script type="text/javascript" src="/js/teams.js"></script>
     </body>
 </html>

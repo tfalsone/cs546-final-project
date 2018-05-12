@@ -63,6 +63,7 @@ function getCookie(cname) {
 }
 
 $(document).ready(function() {
+    console.log(document.cookie);
     var userId = getCookie("AuthCookie");
     console.log(userId);
 

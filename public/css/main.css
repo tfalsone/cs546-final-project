@@ -1,7 +1,9 @@
+* {box-sizing: border-box;}
+
 html {
     font-family: 'Raleway', sans-serif;
     color: #1C3144;
-    font-size: 18px;
+    font-size: 18px !important;
 }
 
 body { 
