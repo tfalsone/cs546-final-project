@@ -1,3 +1,7 @@
+function joinTeam() {
+    alert("Congrats, you've been added!");
+}
+
 $(document).ready(function() {
     var id = window.location.pathname.split("/").pop();
 
