@@ -22,6 +22,7 @@ const constructorMethod = app => {
     app.use(cookieParser());
 
     var currUser = "";
+    var currUserId = "";
 
     app.use("/login", (req, res, next) => {
         if (req.cookies.AuthCookie) {
@@ -48,7 +49,8 @@ const constructorMethod = app => {
                 userController.getUserByEmail(email)
                     .then(user => {
                         console.log(user);
-                        var currUser = user[0];
+                        currUser = user[0];
+                        currUserId = user._id;
                         if (currUser == "") {
                             console.log("User does not exist");
                             res.redirect("/login");
@@ -65,6 +67,7 @@ const constructorMethod = app => {
                                 if (passAuth) {
                                     console.log("Password confirmed");
                                     res.cookie("AuthCookie", currUser);
+                                    res.cookie("IdCookie", currUserId);
                                     res.redirect("/home");
                                 } else {
                                     console.log("Passwords do not match");
@@ -78,6 +81,7 @@ const constructorMethod = app => {
             }
         }
     });
+
 
     app.use("/register", (req, res, next) => {
         if (req.cookies.AuthCookie) {
@@ -103,15 +107,24 @@ const constructorMethod = app => {
             console.log("Passwords do not match");
             res.redirect("/register");
         } else {
-            currUser = userController.createUser(firstname, lastname, email, password);
-            console.log(currUser);
-            res.cookie("AuthCookie", currUser);
-            res.redirect("/home");
+            userController.createUser(firstname, lastname, email, password)
+            .then(user => {
+                currUser = user;
+                currUserId = currUser._id;
+                console.log(currUser);
+                console.log(currUserId);
+                res.cookie("AuthCookie", currUser);
+                res.cookie("IdCookie", currUserId);
+                res.redirect("/home");
+            }).catch(err => {
+                console.log(err);
+            });
         }
     });
 
     app.get("/logout", (req, res) => {
         res.clearCookie("AuthCookie");
+        res.clearCookie("IdCookie");
         currUser = "";
         console.log("User has been logged out");
         res.redirect("/");
