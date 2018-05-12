@@ -22,6 +22,7 @@ const constructorMethod = app => {
     app.use(cookieParser());
 
     var currUser = "";
+    var currUserId = "";
 
     app.use("/login", (req, res, next) => {
         if (req.cookies.AuthCookie) {
@@ -48,7 +49,8 @@ const constructorMethod = app => {
                 userController.getUserByEmail(email)
                     .then(user => {
                         console.log(user);
-                        var currUser = user[0];
+                        currUser = user[0];
+                        currUserId = user._id;
                         if (currUser == "") {
                             console.log("User does not exist");
                             res.redirect("/login");
@@ -65,6 +67,7 @@ const constructorMethod = app => {
                                 if (passAuth) {
                                     console.log("Password confirmed");
                                     res.cookie("AuthCookie", currUser);
+                                    res.cookie("IdCookie", currUserId);
                                     res.redirect("/home");
                                 } else {
                                     console.log("Passwords do not match");
@@ -78,6 +81,7 @@ const constructorMethod = app => {
             }
         }
     });
+
 
     app.use("/register", (req, res, next) => {
         if (req.cookies.AuthCookie) {
@@ -103,15 +107,24 @@ const constructorMethod = app => {
             console.log("Passwords do not match");
             res.redirect("/register");
         } else {
-            currUser = userController.createUser(firstname, lastname, email, password);
-            console.log(currUser);
-            res.cookie("AuthCookie", currUser);
-            res.redirect("/home");
+            userController.createUser(firstname, lastname, email, password)
+            .then(user => {
+                currUser = user;
+                currUserId = currUser._id;
+                console.log(currUser);
+                console.log(currUserId);
+                res.cookie("AuthCookie", currUser);
+                res.cookie("IdCookie", currUserId);
+                res.redirect("/home");
+            }).catch(err => {
+                console.log(err);
+            });
         }
     });
 
     app.get("/logout", (req, res) => {
         res.clearCookie("AuthCookie");
+        res.clearCookie("IdCookie");
         currUser = "";
         console.log("User has been logged out");
         res.redirect("/");
@@ -183,51 +196,7 @@ const constructorMethod = app => {
     });
 
     app.get("/teamsPage", async (req, res) => {
-        let currentUser = req.cookies.AuthCookie;
-        console.log(currentUser._id);
-        let teams = await teamController.findByUser(currentUser._id);
-        console.log(teams);
-
-        let teamIdArray = teams.map(a => a._id);
-
-        for (var i = 0; i < teams.length; i++) {
-            for (var j = 0; j < teams[i].roster.length; j++) {
-                let u = await userController.getUserById(teams[i].roster[j]);
-                teams[i].roster[j] = u.firstName + " " + u.lastName;
-            }
-        }
-
-
-        let upcomingGames = await gameController.findUpcoming(teamIdArray);
-        let recentGames = await gameController.findPrevious(teamIdArray);
-
-        for(var i = 0; i < upcomingGames.length; i++){
-            let l = await leagueController.findOne(upcomingGames[i].leagueId);
-            let team1 = await teamController.findOne(upcomingGames[i].team1);
-            let team2 = await teamController.findOne(upcomingGames[i].team2);
-            upcomingGames[i].leagueId = l.name;
-            upcomingGames[i].team1 = team1.name;
-            upcomingGames[i].team2 = team2.name;
-        }
-
-        for(var i = 0; i < recentGames.length; i++){
-            let l = await leagueController.findOne(recentGames[i].leagueId);
-            let team1 = await teamController.findOne(recentGames[i].team1);
-            let team2 = await teamController.findOne(recentGames[i].team2);
-            recentGames[i].leagueId = l.name;
-            recentGames[i].team1 = team1.name;
-            recentGames[i].team2 = team2.name;
-        }
-
-        console.log(teams);
-        console.log("Upcoming games", upcomingGames);
-        console.log("Recent games", recentGames);
-        res.render("teams", {teams: teams,
-            upcomingGames: upcomingGames,
-            recentGames: recentGames
-        });
-        //res.send(teams);
-        //page.getTeams
+        res.sendFile(path.join(__dirname + '/../public/pages/teams.html'));
     });
 
     app.get("/leaguesPage", (req, res, next) => {
@@ -239,34 +208,7 @@ const constructorMethod = app => {
     });
 
     app.get("/leaguesPage", async (req, res) => {
-        let currentUser = req.cookies.AuthCookie;
-        //console.log("UserId is: ", currentUser._id);
-
-        let teams = await teamController.findByUser(currentUser._id);
-        //console.log(teams);
-        let teamIdArray = teams.map(a => a._id);
-
-        let leagues = await leagueController.findByTeamIds(teamIdArray);
-
-        /*teams = await teamController.findByTeamIds();
-
-        for(var i = 0; i < leagues.length; i++){
-            for(var j = 0; j < leagues[i].teams.length; j++){
-                let l = await teamController.findOne(leagues[i].teams[j]);
-                let tmpTeam = await teamController.findOne(recentGames[i].team1);
-                recentGames[i].leagueId = l.name;
-                recentGames[i].team1 = team1.name;
-                recentGames[i].team2 = team2.name;
-            }
-        }
-
-        //let leagues = await leagueController.findByUser(currentUser._id);
-
-        console.log(leagues);*/
-        //res.send(leagues);
-        res.render("leagues", {
-            leagues: leagues
-        });
+        res.sendFile(path.join(__dirname + '/../public/pages/leagues.html'));
     });
 
     app.get("/", (req, res) => {
