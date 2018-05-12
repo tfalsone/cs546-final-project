@@ -1,3 +1,15 @@
+function goToLeague(element) {
+    var id = element.id;
+    console.log(id);
+    window.location.href = "http://localhost:3000/league/" + id;
+}
+
+function goToTeam(element) {
+    var id = element.id;
+    console.log(id);
+    window.location.href = "http://localhost:3000/team/" + id;
+}
+
 var weekday = new Array(7);
 weekday[0] =  "Sunday";
 weekday[1] = "Monday";
@@ -157,7 +169,7 @@ $(document).ready(function() {
                             var recordString = wins + " - " + losses;
 
                             var newCard = `
-                            <div class="card">
+                            <div class="card" id="`+ teamId + `" onclick="goToTeam(this)">
                                 <h2 class="underline" id="my_team_name">` + teamName + `</h2>
                                 <p id="record">` + recordString + `</p>
                             </div>
@@ -176,7 +188,7 @@ $(document).ready(function() {
                             var leagueSport = league["sport"];
 
                             var newCard = `
-                            <div class="card">
+                            <div class="card" id="` + leagueId + `" onclick="goToLeague(this)">
                                 <h2 class="underline" id="my_league_name">` + leagueName + `</h2>
                                 <p id="sport">` + leagueSport + `</p>
                             </div>
