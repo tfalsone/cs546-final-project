@@ -199,6 +199,18 @@ const constructorMethod = app => {
         res.sendFile(path.join(__dirname + '/../public/pages/teams.html'));
     });
 
+    app.get("/team/:leagueId", (req, res, next) => {
+        if (!(req.cookies.AuthCookie)) {
+            console.log("Unauthorized: User is not logged in");
+            res.redirect("/");
+        }
+        next();
+    });
+
+    app.get("/team/:leagueId", (req, res) => {
+        res.sendFile(path.join(__dirname + '/../public/pages/team.html'));
+    });
+
     app.get("/leaguesPage", (req, res, next) => {
         if (!(req.cookies.AuthCookie)) {
             console.log("Unauthorized: User is not logged in");
@@ -209,6 +221,18 @@ const constructorMethod = app => {
 
     app.get("/leaguesPage", async (req, res) => {
         res.sendFile(path.join(__dirname + '/../public/pages/leagues.html'));
+    });
+
+    app.get("/league/:leagueId", (req, res, next) => {
+        if (!(req.cookies.AuthCookie)) {
+            console.log("Unauthorized: User is not logged in");
+            res.redirect("/");
+        }
+        next();
+    });
+
+    app.get("/league/:leagueId", (req, res) => {
+        res.sendFile(path.join(__dirname + '/../public/pages/league.html'));
     });
 
     app.get("/", (req, res) => {

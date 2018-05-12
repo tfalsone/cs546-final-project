@@ -1,3 +1,9 @@
+function goToLeague(element) {
+    var id = element.id;
+    console.log(id);
+    window.location.href = "http://localhost:3000/league/" + id;
+}
+
 $(document).ready(function() {
     $.ajax({
         type: "GET",
@@ -7,12 +13,13 @@ $(document).ready(function() {
         }
     }).done(function(leagues) {
         leagues.forEach(function(league) {
+            var leagueId = league["_id"];
             var leagueName = league["name"];
             var leagueSport = league["sport"];
             var numTeams = league["teams"].length;
 
             var newCard = `
-            <div class="card">
+            <div class="card" id="` + leagueId + `" onclick="goToLeague(this)">
                 <h3 class="underline">` + leagueName + `</h3>
                 <div class="stats">
                     <ol>
