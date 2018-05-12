@@ -36,7 +36,7 @@ h2 {
 }
 
 .underline {
-    border-bottom: 1px solid #596F62;
+    border-bottom: 1px solid #596F62 !important;
 }
 
 /* Header */

@@ -94,87 +94,92 @@ $(document).ready(function() {
                         console.log(e);
                     }
                 }).done(function(leagues) {
+                    console.log(userInfo);
                     var userTeams = userInfo["teams"];
                     var userLeagues = userInfo["leagues"];
-                    var userGames = games.filter(game => userTeams.includes(game["team1"]) || userTeams.includes(game["team2"]));
+                    if (userTeams != undefined) {
+                        var userGames = games.filter(game => userTeams.includes(game["team1"]) || userTeams.includes(game["team2"]));
 
-                    // Getting Upcoming Games
-                    userGames.forEach(function(game) {
-                        var datetime = new Date(game["time"]);
-                        if (datetime >= new Date()) {
-                            var team1 = teams.find(function(team) {
-                                return team["_id"] == game["team1"];
-                            });
-                            var team2 = teams.find(function(team) {
-                                return team["_id"] == game["team2"];
-                            });
+                        // Getting Upcoming Games
+                        userGames.forEach(function(game) {
+                            var datetime = new Date(game["time"]);
+                            if (datetime >= new Date()) {
+                                var team1 = teams.find(function(team) {
+                                    return team["_id"] == game["team1"];
+                                });
+                                var team2 = teams.find(function(team) {
+                                    return team["_id"] == game["team2"];
+                                });
 
-                            var team1Name = team1["name"];
-                            var team2Name = team2["name"];
-                            var date = getDate(datetime);
-                            var time = getTime(datetime);
-                            var location = game["location"];
+                                var team1Name = team1["name"];
+                                var team2Name = team2["name"];
+                                var date = getDate(datetime);
+                                var time = getTime(datetime);
+                                var location = game["location"];
+
+                                var newCard = `
+                                <div class="card">
+                                    <h2 class="underline" id="teams">` + team1Name + ` vs ` + team2Name + `</h2>
+                                    <ul>
+                                        <li>
+                                            <p>` + date + `</p>
+                                        </li>
+                                        <li>
+                                            <p>` + time + `</p>
+                                        </li>
+                                        <li>
+                                            <p>` + location + `</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                                `;
+                                $(".upcoming-games div.container").prepend(newCard);
+                            }
+                        });
+
+                        // Getting User Teams
+                        userTeams.forEach(function(teamId) {
+                            var team = teams.find(function(team) {
+                                return team["_id"] == teamId;
+                            });
+                            var teamName = team["name"];
+                            var records = team["record"];
+                            var wins = 0;
+                            var losses = 0;
+                            records.forEach(function(record) {
+                                wins = wins + record["wins"];
+                                losses = losses + record["losses"];
+                            });
+                            var recordString = wins + " - " + losses;
 
                             var newCard = `
                             <div class="card">
-                                <h2 class="underline" id="teams">` + team1Name + ` vs ` + team2Name + `</h2>
-                                <ul>
-                                    <li>
-                                        <p>` + date + `</p>
-                                    </li>
-                                    <li>
-                                        <p>` + time + `</p>
-                                    </li>
-                                    <li>
-                                        <p>` + location + `</p>
-                                    </li>
-                                </ul>
+                                <h2 class="underline" id="my_team_name">` + teamName + `</h2>
+                                <p id="record">` + recordString + `</p>
                             </div>
                             `;
-                            $(".upcoming-games div.container").prepend(newCard);
-                        }
-                    });
-
-                    // Getting User Teams
-                    userTeams.forEach(function(teamId) {
-                        var team = teams.find(function(team) {
-                            return team["_id"] == teamId;
+                            $(".my-teams div.container").prepend(newCard);
                         });
-                        var teamName = team["name"];
-                        var records = team["record"];
-                        var wins = 0;
-                        var losses = 0;
-                        records.forEach(function(record) {
-                            wins = wins + record["wins"];
-                            losses = losses + record["losses"];
+                    }
+
+                    if (userLeagues != undefined) {
+                        // Getting User Leagues
+                        userLeagues.forEach(function(leagueId) {
+                            var league = leagues.find(function(league) {
+                                return league["_id"] == leagueId;
+                            });
+                            var leagueName = league["name"];
+                            var leagueSport = league["sport"];
+
+                            var newCard = `
+                            <div class="card">
+                                <h2 class="underline" id="my_league_name">` + leagueName + `</h2>
+                                <p id="sport">` + leagueSport + `</p>
+                            </div>
+                            `;
+                            $(".my-leagues div.container").prepend(newCard);
                         });
-                        var recordString = wins + " - " + losses;
-
-                        var newCard = `
-                        <div class="card">
-                            <h2 class="underline" id="my_team_name">` + teamName + `</h2>
-                            <p id="record">` + recordString + `</p>
-                        </div>
-                        `;
-                        $(".my-teams div.container").prepend(newCard);
-                    });
-
-                    // Getting User Leagues
-                    userLeagues.forEach(function(leagueId) {
-                        var league = leagues.find(function(league) {
-                            return league["_id"] == leagueId;
-                        });
-                        var leagueName = league["name"];
-                        var leagueSport = league["sport"];
-
-                        var newCard = `
-                        <div class="card">
-                            <h2 class="underline" id="my_league_name">` + leagueName + `</h2>
-                            <p id="sport">` + leagueSport + `</p>
-                        </div>
-                        `;
-                        $(".my-leagues div.container").prepend(newCard);
-                    });
+                    }
                 });
             });
         });
