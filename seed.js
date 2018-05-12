@@ -16,7 +16,7 @@ exports.seedDB = function() {
     mongoose.connect(fullMongoUrl, { keepAlive: 120 })
         .then(() => {
             cleanDB();
-            //fillDB();
+            // fillDB();
 
     }).catch(err => {
         console.log('Could not connect to the database. Exiting now...');
@@ -90,54 +90,63 @@ async function fillDB(){
     team.addUser(team1._id, user1._id);
     user.addTeam(user1._id, team1._id);
     user.addLeague(user1._id, league1._id);
+    team.addUser(team4._id, user1._id);
     user.addTeam(user1._id, team4._id);
     user.addLeague(user1._id, league2._id);
 
     team.addUser(team1._id, user2._id);
     user.addTeam(user2._id, team1._id);
     user.addLeague(user2._id, league1._id);
+    team.addUser(team4._id, user2._id);
     user.addTeam(user2._id, team4._id);
     user.addLeague(user2._id, league2._id);
 
     team.addUser(team1._id, user3._id);
     user.addTeam(user3._id, team1._id);
     user.addLeague(user3._id, league1._id);
+    team.addUser(team4._id, user3._id);
     user.addTeam(user3._id, team4._id);
     user.addLeague(user3._id, league2._id);
 
     team.addUser(team1._id, user4._id);
     user.addTeam(user4._id, team1._id);
     user.addLeague(user4._id, league1._id);
+    team.addUser(team4._id, user4._id);
     user.addTeam(user4._id, team4._id);
     user.addLeague(user4._id, league2._id);
     
     team.addUser(team2._id, user5._id);
     user.addTeam(user5._id, team2._id);
     user.addLeague(user5._id, league1._id);
+    team.addUser(team5._id, user5._id);
     user.addTeam(user5._id, team5._id);
     user.addLeague(user5._id, league2._id);
 
     team.addUser(team2._id, user6._id);
     user.addTeam(user6._id, team2._id);
     user.addLeague(user6._id, league1._id);
+    team.addUser(team5._id, user6._id);
     user.addTeam(user6._id, team5._id);
     user.addLeague(user6._id, league2._id);
 
     team.addUser(team3._id, user7._id);
     user.addTeam(user7._id, team3._id);
     user.addLeague(user7._id, league1._id);
+    team.addUser(team5._id, user7._id);
     user.addTeam(user7._id, team5._id);
     user.addLeague(user7._id, league2._id);
 
     team.addUser(team3._id, user8._id);
     user.addTeam(user8._id, team3._id);
     user.addLeague(user8._id, league1._id);
+    team.addUser(team5._id, user8._id);
     user.addTeam(user8._id, team5._id);
     user.addLeague(user8._id, league2._id);
 
     team.addUser(team3._id, user9._id);
     user.addTeam(user9._id, team3._id);
     user.addLeague(user9._id, league1._id);
+    team.addUser(team5._id, user9._id);
     user.addTeam(user9._id, team5._id);
     user.addLeague(user9._id, league2._id);
 
