@@ -64,7 +64,7 @@ const constructorMethod = app => {
                                 var passAuth = bcrypt.compareSync(pass, currUser.hashPwd);
                                 if (passAuth) {
                                     console.log("Password confirmed");
-                                    res.cookie("AuthCookie", currUser);
+                                    res.cookie("AuthCookie", currUser._id);
                                     res.redirect("/home");
                                 } else {
                                     console.log("Passwords do not match");
@@ -141,6 +141,17 @@ const constructorMethod = app => {
         res.sendFile(path.join(__dirname + '/../public/pages/profile.html'));
     });
 
+    app.use("/teamsPage", (req, res, next) => {
+        if (!(req.cookies.AuthCookie)) {
+            console.log("Unauthorized: User is not logged in");
+            res.redirect("/");
+        }
+        next();
+    });
+
+    app.get("/teamsPage", (req, res) => {
+        res.sendFile(path.join(__dirname + '/../public/pages/teams.html'));
+    });
 
     app.use("/addLeague", (req, res, next) => {
         if (!(req.cookies.AuthCookie)) {
