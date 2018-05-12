@@ -95,6 +95,9 @@ $(document).ready(function() {
                         console.log(e);
                     }
                 }).done(function(leagues) {
+                    var usersName = userInfo["firstName"] + " " + userInfo["lastName"];
+                    $("#users-name").text(usersName);
+
                     console.log(userInfo);
                     var userTeams = userInfo["teams"];
                     var userLeagues = userInfo["leagues"];
