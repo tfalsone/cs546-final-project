@@ -1,14 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>8008Leagues Login</title>
+        <title>8008Leagues Sign Up</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="../css/Hunter.css">
+        <!--<meta http-equiv="Content-Security-Policy" content="style-src 'self' http://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;">-->
+        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="/css/login.css">
+        <link rel="stylesheet" href="/css/sign_up.css">
         <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </head>
     <body>
         <main>
+            <div class="form-container">
+                <div class="logo">
+                    <img src="../logo/logo_white.png" width="400" height="90">
+                </div>
+                <form id="login-form" action="/register" method="post">
+                    <div class="username">
+                        <input type="text" name="firstname" placeholder="First Name"/>
+                    </div>
+                    <div class="username">
+                        <input type="text" name="lastname" placeholder="Last Name"/>
+                    </div>
+                    <div class="username">
+                        <input type="text" name="email" placeholder="Email Address"/>
+                    </div>
+                    <div class="password">
+                        <input type="password" name="password" placeholder="Password"/>
+                    </div>
+                    <div class="password">
+                        <input type="password" name="password_conf" placeholder="Confirm Password"/>
+                    </div>
+                    <div class="button">
+                        <input class="btn" type="submit" value="Sign Me Up!"/>
+                    </div>
+                </form>
+                <div class="login-footer">
+                    <p>Already have an account?</p>
+                    <a href="./login" action="/login" method="get">Log in here</a>
+                </div>
+            </div>
+            <!--
             <img src="../logo/logo_blue.png" class="logo">
             <div class="form">
                 <div class="login">
@@ -41,6 +75,7 @@
                     </div>
                 </div>
             </div>
+            -->
         </main>
     </body>
 </html>

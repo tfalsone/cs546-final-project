@@ -19,21 +19,15 @@ exports.findByUser = function(userId){
     })
     .then(teams => {
         if (!teams) {
-            return res.status(404).send({
-                message: "Team not found with id " + userId
-            });
+               console.log("Team not found with id " + userId);
         }
         //console.log(teams);
         return teams;
     }).catch(err => {
         if (err.kind === 'String') {
-            return res.status(404).send({
-                message: "Team not found with id " + userId
-            });
+           console.log("Team not found with id " + userId);
         }
-        return res.status(500).send({
-            message: "Error retrieving Team with userId " + userId
-        });
+        console.log( "Error retrieving Team with userId " + userId);
     });
 };
 
