@@ -15,8 +15,8 @@ exports.seedDB = function() {
     mongoose.Promise = global.Promise;
     mongoose.connect(fullMongoUrl, { keepAlive: 120 })
         .then(() => {
-            // cleanDB();
-            fillDB();
+            cleanDB();
+            //fillDB();
 
     }).catch(err => {
         console.log('Could not connect to the database. Exiting now...');

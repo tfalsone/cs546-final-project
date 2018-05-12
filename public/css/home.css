@@ -90,7 +90,7 @@
 }
 
 .results .vs {
-    position: fixed;
+    position: absolute;
     text-align: center;
     left: 25%;
     right: 25%;
