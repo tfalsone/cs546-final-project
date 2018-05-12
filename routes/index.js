@@ -186,7 +186,7 @@ const constructorMethod = app => {
         let currentUser = req.cookies.AuthCookie;
         console.log(currentUser._id);
         let teams = await teamController.findByUser(currentUser._id);
-        //console.log(teams);
+        console.log(teams);
 
         let teamIdArray = teams.map(a => a._id);
 
@@ -248,7 +248,7 @@ const constructorMethod = app => {
         //console.log(teams);
         let teamIdArray = teams.map(a => a._id);
 
-        //let leagues = await leagueController.findByTeamIds(teamIdArray);
+        let leagues = await leagueController.findByTeamIds(teamIdArray);
 
         /*teams = await teamController.findByTeamIds();
 
@@ -265,7 +265,7 @@ const constructorMethod = app => {
         //let leagues = await leagueController.findByUser(currentUser._id);
 
         console.log(leagues);*/
-        res.send(teams);
+        res.send(leagues);
 
     });
 
