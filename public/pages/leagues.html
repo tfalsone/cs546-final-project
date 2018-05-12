@@ -2,74 +2,52 @@
 <html lang="en">
     <head>
         <title>8008Leagues</title>
-        <meta charset="UTF-8">
+		<meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="../css/Hunter2.css">
+        <link rel="stylesheet" href="/css/main.css">
+		<link rel="stylesheet" href="/css/teams.css">
         <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </head>
-    <body onload="setVars()">
-        <script>
-            function setVars(){
-                var select = document.getElementById("leaguelist"); 
-                var leaguelst = <%- JSON.stringify(leagues) %>;
-
-                for(var i = 0; i < leaguelst.length; i++) {
-                    var opt = leaguelst[i].name;
-                    var el = document.createElement("option");
-                    el.textContent = opt;
-                    el.value = opt;
-                    select.appendChild(el);
-                }
-            }
-        </script>
-        <main>
-            <header class="header">
-                <a href="/home" class="left">8008Leagues</a>
-                <div class="center">
-                    <a href="/teams">Teams</a>
-                    <a href="/leagues">Leagues</a>
-                    <a href="/profile">Profile</a>
-                </div>
-            </header>
-
-            <div class="select-style">
-                <select class="dropdown" id="leaguelist" name="leagueId">
-                    <option value="" disabled selected>Select League</option>
-                </select>
+    <body>
+        <header class="header">
+            <a href="/home"><img onmouseover="this.src='/logo/logo_dark.png';" onmouseout="this.src='/logo/logo_green.png';" src="/logo/logo_green.png" width="245" height="57"></a>
+            <div class="center">
+                <a href="/teamsPage">Teams</a>
+                <a href="/leaguesPage">Leagues</a>
+                <a href="/profile">Profile</a>
             </div>
-            
-            <h1 id="teamname"></h1>
+        </header>
+        <main>
+            <div class="search-container">
+                <form onsubmit="search(event)">
+                    <input type="text" placeholder="Search leagues..." name="search">
+                </form>
+            </div>
 
-            <section class="wrapper">
-                <div class="roster">
+            <div class="all-leagues">
+                <h1>All Active Leagues:</h1>
+                <div class="container">
+                    <!-- Card Template
                     <div class="card">
-                        <div class="container">
-                            <h1>Teams</h1>
-                            <ul>
-                            </ul>
-                            <ul id="players"></ul>
+                        <h3 class="underline">A Cool League Name</h3>
+                        <div class="stats">
+                            <ol>
+                                <li class="sport">
+                                    <p id="description" class="underline">Sport</p>
+                                    <p id="sport">Floor Hockey</p>
+                                </li>
+                                <li class="numTeams">
+                                    <p id="description" class="underline"># of Teams</p>
+                                    <p id="value">10</p>
+                                </li>
+                            </ol>
                         </div>
                     </div>
+                    -->
                 </div>
-
-
-                <div class="schedule">
-                    <div class="card">
-                        <div class="container">
-                            <h1>Upcoming Games</h1>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="stats">
-                    <div class="card">
-                        <div class="container">
-                            <h1>Past Games</h1>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            </div>
         </main>
+        <script type="text/javascript" src="/js/leagues.js"></script>
     </body>
 </html>

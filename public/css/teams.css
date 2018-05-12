@@ -29,6 +29,7 @@
 }
 
 .card h3 {
+    text-align: center;
     padding-bottom: 4px;
 }
 
@@ -66,5 +67,12 @@
 .stats p#value {
     color: #70161E;
     font-size: 24px;
+    font-weight: bold;
+}
+
+.stats p#sport {
+    color: #70161E;
+    margin-top: 13px;
+    font-size: 20px;
     font-weight: bold;
 }

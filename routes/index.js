@@ -50,7 +50,7 @@ const constructorMethod = app => {
                     .then(user => {
                         console.log(user);
                         currUser = user[0];
-                        currUserId = user._id;
+                        currUserId = currUser._id;
                         if (currUser == "") {
                             console.log("User does not exist");
                             res.redirect("/login");
