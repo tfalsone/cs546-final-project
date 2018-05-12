@@ -1,37 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        
         <title>8008Leagues Login</title>
-        <meta charset="UTF-8">
-        <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; font-src 'self' data: fonts.gstatic.com;">
-        <link rel="stylesheet" href="/css/Hunter.css">
+		<meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--<meta http-equiv="Content-Security-Policy" content="style-src 'self' http://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;">-->
+        <link rel="stylesheet" href="/css/main.css">
+		<link rel="stylesheet" href="/css/login.css">
         <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </head>
     <body>
         <main>
-            <img src="../logo/logo_blue.png" class="logo">
-            <div class="form">
-                <div class="login">
-                    <h1>Log in to 8008Leagues</h1>
-
-                    <form id="login-form" action="/login" method="post">
-                        <div>
-                            <input type="text" name="username" placeholder="Username"/>
-                        </div>
-                        <div>
-                            <input type="password" name="password" placeholder="Password"/>
-                        </div>
-                        <div>
-                            <input class="btn" type="submit" value="Game On!"/>
-                        </div>
-                    </form>
-                    <div class="login-footer">
-                        <a>Don't have an account?</a>
-                        <br>
-                        <a href="./register" action="/register" method="get">Sign up here</a>
-                    </div>
+            <div class="form-container">
+                <div class="logo">
+                    <img src="../logo/logo_white.png" width="400" height="90">
                 </div>
+                <form id="login-form" action="/login" method="post">
+                    <div class="username">
+                        <input type="text" name="username" placeholder="Username"/>
+                    </div>
+                    <div class="password">
+                        <input type="password" name="password" placeholder="Password"/>
+                    </div>
+                    <div class="button">
+                        <input class="btn" type="submit" value="Game On!"/>
+                    </div>
+                </form>
+                <div class="login-footer">
+                    <p>Don't have an account?</p>
+                    <a href="./register" action="/register" method="get">Sign up here</a>
+                </div>
+            </div>
             </div>
         </main>
     </body>
