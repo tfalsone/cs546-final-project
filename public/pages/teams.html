@@ -15,7 +15,6 @@
 
                 var select = document.getElementById("teamlist"); 
                 var teamlst = <%- JSON.stringify(teams) %>;
-
                 for(var i = 0; i < teamlst.length; i++) {
                     var el = document.createElement("option");
                     el.textContent = teamlst[i].name;
@@ -26,10 +25,23 @@
             function fillInfo(currTeam){
                 var teamlst = <%- JSON.stringify(teams) %>;
                 var rosterlst = document.getElementById("roster");
+
                 for(var i = 0; i < teamlst.length; i++) {
                     if(currTeam === teamlst[i].name){
                         var roster = teamlst[i].roster;
                         for(var j = 0; j < roster.length; j++) {
+                            var el = document.createElement("li");
+                            el.textContent = roster[j];
+                            rosterlst.appendChild(el);
+                        }
+                    }
+
+                    var pastlst = <%- JSON.stringify(recentGames) %>;
+                    console.log(pastlst)
+                    var past = document.getElementById("pastGames");
+
+                    for(var i = 0; i < pastlst.length; i++) {
+                        if(currTeam === pastlst[i].team1 || currTeam === pastlst[i].team2){
                             var el = document.createElement("li");
                             el.textContent = roster[j];
                             rosterlst.appendChild(el);
@@ -73,6 +85,12 @@
                     <div class="card">
                         <div class="container">
                             <h1>Upcoming Games</h1>
+                            <div class="card" id="future1">
+                            </div>
+                            <div class="card" id="future2">
+                            </div>
+                            <div class="card" id="future3">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -81,6 +99,12 @@
                     <div class="card">
                         <div class="container">
                             <h1>Past Games</h1>
+                            <div class="card" id="past1">
+                            </div>
+                            <div class="card" id="past2">
+                            </div>
+                            <div class="card" id="past3">
+                            </div>
                         </div>
                     </div>
                 </div>
