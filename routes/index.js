@@ -64,7 +64,7 @@ const constructorMethod = app => {
                                 var passAuth = bcrypt.compareSync(pass, currUser.hashPwd);
                                 if (passAuth) {
                                     console.log("Password confirmed");
-                                    res.cookie("AuthCookie", currUser._id);
+                                    res.cookie("AuthCookie", currUser);
                                     res.redirect("/home");
                                 } else {
                                     console.log("Passwords do not match");
@@ -194,8 +194,8 @@ const constructorMethod = app => {
     });
 
     app.get("/teamsPage", async (req, res) => {
-        currentUser = req.cookies.AuthCookie;
-        //console.log(currentUser._id);
+        let currentUser = req.cookies.AuthCookie;
+        console.log(currentUser._id);
         let teams = await teamController.findByUser(currentUser._id);
         //console.log(teams);
 
@@ -252,10 +252,11 @@ const constructorMethod = app => {
 
 
     app.get("/leaguesPage", async (req, res) => {
-        currentUser = req.cookies.AuthCookie;
-        //console.log(currentUser._id)
+        let currentUser = req.cookies.AuthCookie;
+        console.log("UserId is: ", currentUser._id);
 
         let teams = await teamController.findByUser(currentUser._id);
+        console.log(teams);
         let teamIdArray = teams.map(a => a._id);
 
         let leagues = await leagueController.findByTeamIds(teamIdArray);
