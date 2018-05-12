@@ -164,7 +164,6 @@ async function fillDB(){
     user.addLeague(user2._id, league1._id);
     user.addLeague(user3._id, league1._id);
     user.addLeague(user4._id, league1._id);
-
     user.addLeague(user1._id, league2._id);
     user.addLeague(user2._id, league2._id);*/
 
