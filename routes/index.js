@@ -242,8 +242,14 @@ const constructorMethod = app => {
 
     app.get("/leaguesPage", async (req, res) => {
         currentUser = req.cookies.AuthCookie;
-        
-        let leagues = await leagueController.findByUser(currentUser._id);
+        //console.log(currentUser._id)
+
+        let teams = await teamController.findByUser(currentUser._id);
+        let teamIdArray = teams.map(a => a._id);
+
+        let leagues = await leagueController.findByTeamIds(teamIdArray);
+
+        //let leagues = await leagueController.findByUser(currentUser._id);
 
         console.log(leagues);
         res.send(leagues);

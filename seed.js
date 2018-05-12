@@ -15,8 +15,8 @@ exports.seedDB = function() {
     mongoose.Promise = global.Promise;
     mongoose.connect(fullMongoUrl, { keepAlive: 120 })
         .then(() => {
-            // cleanDB();
-            fillDB();
+            cleanDB();
+            //fillDB();
 
     }).catch(err => {
         console.log('Could not connect to the database. Exiting now...');
@@ -76,13 +76,13 @@ async function fillDB(){
     var team1 = await team.createTeam("8008 Boyz", league1._id);
     var team2 = await team.createTeam("The Other Guys", league1._id);
     var team3 = await team.createTeam("A Really Bad Team", league1._id);
-    league.addTeam(league1._id, team1.id);
-    league.addTeam(league1._id, team2.id);
-    league.addTeam(league1._id, team3.id);
+    //league.addTeam(league1._id, team1.id);
+    //league.addTeam(league1._id, team2.id);
+    //league.addTeam(league1._id, team3.id);
     var team4 = await team.createTeam("Cobras", league2._id);
     var team5 = await team.createTeam("Average Joes", league2._id);
-    league.addTeam(league2._id, team4.id);
-    league.addTeam(league2._id, team5.id);
+    //league.addTeam(league2._id, team4.id);
+    //league.addTeam(league2._id, team5.id);
 
     // console.log(team1);
     // console.log(team1._id);
