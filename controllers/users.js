@@ -15,6 +15,7 @@ exports.getAllUsers = function () {
         });
 };
 
+
 exports.getUserById = function (userId) {
     return User.findById(userId)
         .then(user => {
