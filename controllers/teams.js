@@ -17,21 +17,22 @@ exports.findByUser = function(userId){
     return Team.find({
         "roster": userId
     })
-    .then(user => {
-        if (!user) {
+    .then(teams => {
+        if (!teams) {
             return res.status(404).send({
-                message: "User not found with id " + userId
+                message: "Team not found with id " + userId
             });
         }
-        return user;
+        //console.log(teams);
+        return teams;
     }).catch(err => {
         if (err.kind === 'String') {
             return res.status(404).send({
-                message: "User not found with id " + userId
+                message: "Team not found with id " + userId
             });
         }
         return res.status(500).send({
-            message: "Error retrieving User with id " + userId
+            message: "Error retrieving Team with userId " + userId
         });
     });
 };

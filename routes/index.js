@@ -64,7 +64,7 @@ const constructorMethod = app => {
                                 var passAuth = bcrypt.compareSync(pass, currUser.hashPwd);
                                 if (passAuth) {
                                     console.log("Password confirmed");
-                                    res.cookie("AuthCookie", currUser._id);
+                                    res.cookie("AuthCookie", currUser);
                                     res.redirect("/home");
                                 } else {
                                     console.log("Passwords do not match");
@@ -141,17 +141,6 @@ const constructorMethod = app => {
         res.sendFile(path.join(__dirname + '/../public/pages/profile.html'));
     });
 
-    app.use("/teamsPage", (req, res, next) => {
-        if (!(req.cookies.AuthCookie)) {
-            console.log("Unauthorized: User is not logged in");
-            res.redirect("/");
-        }
-        next();
-    });
-
-    app.get("/teamsPage", (req, res) => {
-        res.sendFile(path.join(__dirname + '/../public/pages/teams.html'));
-    });
 
     app.use("/addLeague", (req, res, next) => {
         if (!(req.cookies.AuthCookie)) {
@@ -194,8 +183,8 @@ const constructorMethod = app => {
     });
 
     app.get("/teamsPage", async (req, res) => {
-        currentUser = req.cookies.AuthCookie;
-        //console.log(currentUser._id);
+        let currentUser = req.cookies.AuthCookie;
+        console.log(currentUser._id);
         let teams = await teamController.findByUser(currentUser._id);
         //console.log(teams);
 
@@ -252,12 +241,31 @@ const constructorMethod = app => {
 
 
     app.get("/leaguesPage", async (req, res) => {
-        currentUser = req.cookies.AuthCookie;
-        
-        let leagues = await leagueController.findByUser(currentUser._id);
+        let currentUser = req.cookies.AuthCookie;
+        //console.log("UserId is: ", currentUser._id);
 
-        console.log(leagues);
-        res.send(leagues);
+        let teams = await teamController.findByUser(currentUser._id);
+        //console.log(teams);
+        let teamIdArray = teams.map(a => a._id);
+
+        //let leagues = await leagueController.findByTeamIds(teamIdArray);
+
+        /*teams = await teamController.findByTeamIds();
+
+        for(var i = 0; i < leagues.length; i++){
+            for(var j = 0; j < leagues[i].teams.length; j++){
+                let l = await teamController.findOne(leagues[i].teams[j]);
+                let tmpTeam = await teamController.findOne(recentGames[i].team1);
+                recentGames[i].leagueId = l.name;
+                recentGames[i].team1 = team1.name;
+                recentGames[i].team2 = team2.name;
+            }
+        }
+
+        //let leagues = await leagueController.findByUser(currentUser._id);
+
+        console.log(leagues);*/
+        res.send(teams);
 
     });
 

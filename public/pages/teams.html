@@ -11,15 +11,30 @@
     <body onload="setVars()">
         <script>
             function setVars(){
-                var select = document.getElementById("leaguelist"); 
-                var leaguelst = <%- JSON.stringify(leagues) %>;
 
-                for(var i = 0; i < leaguelst.length; i++) {
-                    var opt = leaguelst[i].name;
+
+                var select = document.getElementById("teamlist"); 
+                var teamlst = <%- JSON.stringify(teams) %>;
+
+                for(var i = 0; i < teamlst.length; i++) {
                     var el = document.createElement("option");
-                    el.textContent = opt;
-                    el.value = opt;
+                    el.textContent = teamlst[i].name;
                     select.appendChild(el);
+                }
+            }
+
+            function fillInfo(currTeam){
+                var teamlst = <%- JSON.stringify(teams) %>;
+                var rosterlst = document.getElementById("roster");
+                for(var i = 0; i < teamlst.length; i++) {
+                    if(currTeam === teamlst[i].name){
+                        var roster = teamlst[i].roster;
+                        for(var j = 0; j < roster.length; j++) {
+                            var el = document.createElement("li");
+                            el.textContent = roster[j];
+                            rosterlst.appendChild(el);
+                        }
+                    }
                 }
             }
         </script>
@@ -34,11 +49,11 @@
             </header>
 
             <div class="select-style">
-                <select class="dropdown" id="leaguelist" name="leagueId">
+                <select class="dropdown" id="teamlist" onchange="fillInfo(this.value)">
                     <option value="" disabled selected>Select Team</option>
                 </select>
             </div>
-            
+
             <h1 id="teamname"></h1>
 
             <section class="wrapper">
@@ -46,7 +61,7 @@
                     <div class="card">
                         <div class="container">
                             <h1>Roster</h1>
-                            <ul>
+                            <ul id="roster">
                             </ul>
                             <ul id="players"></ul>
                         </div>

@@ -15,33 +15,17 @@ exports.findAll = function () {
 };
 
 
-exports.findByUser = function (userId) {
-    return team.findByUser(userId)
-        .then(teams => {
-            let teamIdArray = teams.map(a => a._id);
-
-            return League.find({
-                    "teams": teamIdArray
-                })
-                .then(leagues => {
-                    if (!leagues) {
-                        return res.status(404).send({
-                            message: "League not found with id " + userId
-                        });
-                    }
-                    return leagues;
-                }).catch(err => {
-                    if (err.kind === 'String') {
-                        return res.status(404).send({
-                            message: "League not found with id " + userId
-                        });
-                    }
-                    return res.status(500).send({
-                        message: "Error retrieving League with userId " + userId
-                    });
+exports.findByTeamIds = function (teamIds) {
+    return League.find({
+            "teams": { $all: teamIds}
+        })
+        .then(leagues => {
+            if (!leagues) {
+                return res.status(404).send({
+                    message: "League not found with id " + userId
                 });
-
-
+            }
+            return leagues;
         }).catch(err => {
             if (err.kind === 'String') {
                 return res.status(404).send({
@@ -52,8 +36,6 @@ exports.findByUser = function (userId) {
                 message: "Error retrieving League with userId " + userId
             });
         });
-
-
 }
 
 exports.createLeague = function (name, sport) {
@@ -84,7 +66,7 @@ exports.addTeam = function (leagueId, teamId) {
             league.teams.push(teamId);
             league.save();
 
-            team.addLeague(teamId, league._id);
+            //team.addLeague(teamId, league._id);
 
             return league;
             //res.send(team);
