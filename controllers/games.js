@@ -31,20 +31,14 @@ exports.findUpcoming = function(teamIdArray){
     })
     .then(games => {
         if (!games) {
-            return res.status(404).send({
-                message: "User not found with id " + req.params.userId
-            });
+            console.log("User not found with id " + req.params.userId);
         }
         return games;
     }).catch(err => {
         if (err.kind === 'String') {
-            return res.status(404).send({
-                message: "User not found with id " + req.params.userId
-            });
+            console.log("User not found with id " + req.params.userId);
         }
-        return res.status(500).send({
-            message: "Error retrieving User with id " + req.params.userId
-        });
+        console.log("Error retrieving User with id " + req.params.userId);
     });
 
 };

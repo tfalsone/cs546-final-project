@@ -21,20 +21,14 @@ exports.findByTeamIds = function (teamIds) {
         })
         .then(leagues => {
             if (!leagues) {
-                return res.status(404).send({
-                    message: "League not found with id " + userId
-                });
+               console.log("League not found with id " + userId);
             }
             return leagues;
         }).catch(err => {
             if (err.kind === 'String') {
-                return res.status(404).send({
-                    message: "League not found with id " + userId
-                });
+                console.log("League not found with id " + userId);
             }
-            return res.status(500).send({
-                message: "Error retrieving League with userId " + userId
-            });
+            console.log("Error retrieving League with userId " + userId);
         });
 }
 
